@@ -185,7 +185,7 @@ renderer.domElement.addEventListener("click", (e) => {
 });
 // ── End hotspots ─────────────────────────────────────────────────────────────
 
-// ── Color picker ─────────────────────────────────────────────────────────────
+// ── Color picker — body ───────────────────────────────────────────────────────
 const RAL_NAMES = {
   "7016": "Gris anthracite",
   "9016": "Blanc signalisation",
@@ -196,36 +196,62 @@ const RAL_NAMES = {
 
 let bodyMaterial = null;
 
-function applyColor(hex) {
+function applyBodyColor(hex) {
   if (!bodyMaterial) return;
   bodyMaterial.color.set(hex);
 }
 
-const swatches = document.querySelectorAll(".swatch[data-color]");
+const bodySwatches = document.querySelectorAll(".swatch:not(.swatch-light)[data-color]");
 const colorRalEl = document.getElementById("color-ral");
 const colorNameEl = document.getElementById("color-name");
 const colorCustom = document.getElementById("color-custom");
 
-swatches.forEach((btn) => {
+bodySwatches.forEach((btn) => {
   btn.addEventListener("click", () => {
-    swatches.forEach((s) => s.classList.remove("active"));
+    bodySwatches.forEach((s) => s.classList.remove("active"));
     btn.classList.add("active");
     const hex = btn.dataset.color;
     const ral = btn.dataset.ral;
     colorCustom.value = hex;
     colorRalEl.textContent = ral;
     colorNameEl.textContent = RAL_NAMES[ral] ?? "";
-    applyColor(hex);
+    applyBodyColor(hex);
   });
 });
 
 colorCustom.addEventListener("input", (e) => {
-  swatches.forEach((s) => s.classList.remove("active"));
+  bodySwatches.forEach((s) => s.classList.remove("active"));
   colorRalEl.textContent = "—";
   colorNameEl.textContent = "Personnalisé";
-  applyColor(e.target.value);
+  applyBodyColor(e.target.value);
 });
-// ── End color picker ──────────────────────────────────────────────────────────
+
+// ── Color picker — emissive light ─────────────────────────────────────────────
+let emissiveMaterial = null;
+
+function applyLightColor(hex) {
+  if (!emissiveMaterial) return;
+  emissiveMaterial.color.set(hex);
+  emissiveMaterial.emissive.set(hex);
+}
+
+const lightSwatches = document.querySelectorAll(".swatch-light[data-color]");
+const lightCustom = document.getElementById("light-custom");
+
+lightSwatches.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    lightSwatches.forEach((s) => s.classList.remove("active"));
+    btn.classList.add("active");
+    lightCustom.value = btn.dataset.color;
+    applyLightColor(btn.dataset.color);
+  });
+});
+
+lightCustom.addEventListener("input", (e) => {
+  lightSwatches.forEach((s) => s.classList.remove("active"));
+  applyLightColor(e.target.value);
+});
+// ── End color pickers ─────────────────────────────────────────────────────────
 
 let loadedModel = null;
 
@@ -243,9 +269,9 @@ loader.load(
     setTimeout(() => loader_el.remove(), 400);
     createHotspotPins();
     loadedModel.traverse((obj) => {
-      if (obj.isMesh && obj.material?.name === "RAL_7016") {
-        bodyMaterial = obj.material;
-      }
+      if (!obj.isMesh) return;
+      if (obj.material?.name === "RAL_7016") bodyMaterial = obj.material;
+      if (obj.material?.name === "Emissive") emissiveMaterial = obj.material;
     });
   },
   undefined,
