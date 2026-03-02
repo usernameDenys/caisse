@@ -62,6 +62,129 @@ function fitCameraToModel(model) {
   ctrls.update();
 }
 
+// ── Hotspots ────────────────────────────────────────────────────────────────
+// Shift+click on the model logs coordinates to the console so you can
+// copy them here as new hotspot entries.
+const HOTSPOTS = [
+  {
+    id: "conveyor",
+    label: "Tapis convoyeur",
+    title: "Bande transporteuse",
+    content:
+      "Bande caoutchouc avec réglage par vis avant. Marche avant ou arrière, possibilité de commande pédale.",
+    position: new THREE.Vector3(0.329, -0.129, -1.168),
+  },
+  {
+    id: "motor",
+    label: "Motorisation",
+    title: "Moteur 220 V EU",
+    content:
+      "Moteur monophasé 220 V normes EU. Boîtier de commande avec fonction lanterneau 2 couleurs.",
+    position: new THREE.Vector3(0.169, -0.35, -0.193),
+  },
+  {
+    id: "bac",
+    label: "Bac arrière",
+    title: "Bac inox",
+    content:
+      "Bac arrière en inox pour nettoyage rapide et évacuation rapide des articles.",
+    position: new THREE.Vector3(0.066, -0.15, 1.111),
+  },
+  {
+    id: "protection",
+    label: "Protection caissier",
+    title: "Écran de protection",
+    content:
+      "Protection du personnel en plexiglas transparent. Fixation rigide sur la base de la caisse pour une stabilité optimale.",
+    position: new THREE.Vector3(0.65, 0.726, 0.241),
+  },
+];
+
+// Popup elements
+const popup = document.getElementById("popup");
+const popupLabel = document.getElementById("popup-label");
+const popupTitle = document.getElementById("popup-title");
+const popupContent = document.getElementById("popup-content");
+const popupClose = document.getElementById("popup-close");
+
+let activePin = null;
+
+function showPopup(hs, pinEl) {
+  if (activePin) activePin.classList.remove("active");
+  activePin = pinEl;
+  pinEl.classList.add("active");
+  popupLabel.textContent = hs.label;
+  popupTitle.textContent = hs.title;
+  popupContent.textContent = hs.content;
+  popup.hidden = false;
+}
+
+function hidePopup() {
+  popup.hidden = true;
+  if (activePin) activePin.classList.remove("active");
+  activePin = null;
+}
+
+popupClose.addEventListener("click", hidePopup);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") hidePopup();
+});
+
+function createHotspotPins() {
+  HOTSPOTS.forEach((hs) => {
+    const pin = document.createElement("button");
+    pin.className = "hotspot-pin";
+    pin.setAttribute("aria-label", hs.label);
+    wrap.appendChild(pin);
+    hs.el = pin;
+    pin.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (activePin === pin) {
+        hidePopup();
+      } else {
+        showPopup(hs, pin);
+      }
+    });
+  });
+}
+
+function updateHotspotPositions() {
+  HOTSPOTS.forEach((hs) => {
+    if (!hs.el) return;
+    const pos = hs.position.clone().project(camera);
+    if (pos.z > 1) {
+      hs.el.style.visibility = "hidden";
+      return;
+    }
+    hs.el.style.visibility = "";
+    const x = (pos.x * 0.5 + 0.5) * wrap.clientWidth;
+    const y = (-pos.y * 0.5 + 0.5) * wrap.clientHeight;
+    hs.el.style.left = `${x}px`;
+    hs.el.style.top = `${y}px`;
+  });
+}
+
+// Shift+click on canvas → logs 3D hit position for easy hotspot placement
+const _raycaster = new THREE.Raycaster();
+const _mouse = new THREE.Vector2();
+renderer.domElement.addEventListener("click", (e) => {
+  if (!e.shiftKey || !loadedModel) return;
+  const rect = renderer.domElement.getBoundingClientRect();
+  _mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  _mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  _raycaster.setFromCamera(_mouse, camera);
+  const hits = _raycaster.intersectObject(loadedModel, true);
+  if (hits.length > 0) {
+    const p = hits[0].point;
+    console.log(
+      `📍 Hotspot position: new THREE.Vector3(${p.x.toFixed(3)}, ${p.y.toFixed(
+        3
+      )}, ${p.z.toFixed(3)})`
+    );
+  }
+});
+// ── End hotspots ─────────────────────────────────────────────────────────────
+
 let loadedModel = null;
 
 const loader = new GLTFLoader();
@@ -76,6 +199,7 @@ loader.load(
     fitCameraToModel(loadedModel);
     loader_el.classList.add("hidden");
     setTimeout(() => loader_el.remove(), 400);
+    createHotspotPins();
   },
   undefined,
   (error) => {
@@ -106,8 +230,9 @@ scene.add(bottomLight);
 
 function animate() {
   requestAnimationFrame(animate);
-  renderer.render(scene, camera);
   ctrls.update();
+  updateHotspotPositions();
+  renderer.render(scene, camera);
 }
 
 animate();

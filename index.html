@@ -11,6 +11,20 @@
     <div id="canvas-wrap">
       <div class="ui">
         <h1>Caisse</h1>
+        <div id="hint">
+          <div class="hint-row">
+            <span class="hint-icon">⟳</span>
+            <span>Glisser pour faire pivoter</span>
+          </div>
+          <div class="hint-row">
+            <span class="hint-icon">⊕</span>
+            <span>Molette / pincement pour zoomer</span>
+          </div>
+          <div class="hint-row">
+            <span class="hint-icon">+</span>
+            <span>Points <strong>+</strong> — détails du composant</span>
+          </div>
+        </div>
       </div>
       <div id="loader">
         <div class="loader-spinner"></div>
@@ -64,6 +78,13 @@
         ></span
       >
     </footer>
+
+    <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" hidden>
+      <button id="popup-close" aria-label="Fermer">&#x2715;</button>
+      <p id="popup-label"></p>
+      <h3 id="popup-title"></h3>
+      <p id="popup-content"></p>
+    </div>
 
     <script type="module" src="/src/main.js"></script>
   </body>
