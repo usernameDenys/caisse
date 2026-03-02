@@ -4,6 +4,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
 
 const wrap = document.getElementById("canvas-wrap");
+const loader_el = document.getElementById("loader");
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0f0f0);
@@ -73,10 +74,13 @@ loader.load(
     loadedModel.position.sub(center);
     scene.add(loadedModel);
     fitCameraToModel(loadedModel);
+    loader_el.classList.add("hidden");
+    setTimeout(() => loader_el.remove(), 400);
   },
   undefined,
   (error) => {
     console.error("Failed to load model:", error);
+    loader_el.classList.add("hidden");
   }
 );
 
