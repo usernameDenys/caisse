@@ -185,6 +185,48 @@ renderer.domElement.addEventListener("click", (e) => {
 });
 // ── End hotspots ─────────────────────────────────────────────────────────────
 
+// ── Color picker ─────────────────────────────────────────────────────────────
+const RAL_NAMES = {
+  "7016": "Gris anthracite",
+  "9016": "Blanc signalisation",
+  "5010": "Bleu gentiane",
+  "3020": "Rouge signalisation",
+  "9005": "Noir foncé",
+};
+
+let bodyMaterial = null;
+
+function applyColor(hex) {
+  if (!bodyMaterial) return;
+  bodyMaterial.color.set(hex);
+}
+
+const swatches = document.querySelectorAll(".swatch[data-color]");
+const colorRalEl = document.getElementById("color-ral");
+const colorNameEl = document.getElementById("color-name");
+const colorCustom = document.getElementById("color-custom");
+
+swatches.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    swatches.forEach((s) => s.classList.remove("active"));
+    btn.classList.add("active");
+    const hex = btn.dataset.color;
+    const ral = btn.dataset.ral;
+    colorCustom.value = hex;
+    colorRalEl.textContent = ral;
+    colorNameEl.textContent = RAL_NAMES[ral] ?? "";
+    applyColor(hex);
+  });
+});
+
+colorCustom.addEventListener("input", (e) => {
+  swatches.forEach((s) => s.classList.remove("active"));
+  colorRalEl.textContent = "—";
+  colorNameEl.textContent = "Personnalisé";
+  applyColor(e.target.value);
+});
+// ── End color picker ──────────────────────────────────────────────────────────
+
 let loadedModel = null;
 
 const loader = new GLTFLoader();
@@ -200,6 +242,11 @@ loader.load(
     loader_el.classList.add("hidden");
     setTimeout(() => loader_el.remove(), 400);
     createHotspotPins();
+    loadedModel.traverse((obj) => {
+      if (obj.isMesh && obj.material?.name === "RAL_7016") {
+        bodyMaterial = obj.material;
+      }
+    });
   },
   undefined,
   (error) => {

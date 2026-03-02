@@ -21,8 +21,8 @@
             <span>Molette / pincement pour zoomer</span>
           </div>
           <div class="hint-row">
-            <span class="hint-icon">+</span>
-            <span>Points <strong>+</strong> — détails du composant</span>
+            <span class="hint-icon" style="font-style:italic;font-family:Georgia,serif;font-size:13px;font-weight:500;">i</span>
+            <span>Points <strong style="font-style:italic;font-family:Georgia,serif;">i</strong> — détails du composant</span>
           </div>
         </div>
       </div>
@@ -50,6 +50,21 @@
             facilité d'accès PMR
           </li>
         </ul>
+      </section>
+
+      <section class="info-section">
+        <h2>Couleur de la caisse</h2>
+        <div class="color-swatches">
+          <button class="swatch active" data-color="#5B686D" data-ral="7016" style="background:#5B686D" title="RAL 7016 — Gris anthracite"></button>
+          <button class="swatch" data-color="#F1F0EB" data-ral="9016" style="background:#F1F0EB" title="RAL 9016 — Blanc signalisation"></button>
+          <button class="swatch" data-color="#1C3F6E" data-ral="5010" style="background:#1C3F6E" title="RAL 5010 — Bleu gentiane"></button>
+          <button class="swatch" data-color="#CC0605" data-ral="3020" style="background:#CC0605" title="RAL 3020 — Rouge signalisation"></button>
+          <button class="swatch" data-color="#0A0A0A" data-ral="9005" style="background:#0A0A0A" title="RAL 9005 — Noir foncé"></button>
+          <label class="swatch swatch-custom" title="Couleur personnalisée">
+            <input type="color" id="color-custom" value="#5B686D" />
+          </label>
+        </div>
+        <p class="color-label">RAL <span id="color-ral">7016</span> — <span id="color-name">Gris anthracite</span></p>
       </section>
 
       <section class="info-section">

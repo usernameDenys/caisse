@@ -23,6 +23,57 @@ body {
   height: 100% !important;
 }
 
+/* ── Color picker ── */
+.color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+}
+
+.swatch:hover {
+  transform: scale(1.15);
+}
+
+.swatch.active {
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 0 0 3px rgba(255,255,255,0.9), 0 0 0 4px #1a1a1a;
+}
+
+.swatch-custom {
+  background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
+  cursor: pointer;
+  position: relative;
+}
+
+.swatch-custom input[type="color"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.color-label {
+  font-size: 11px;
+  color: #888;
+  margin: 0;
+}
+
 /* ── Loader ── */
 #loader {
   position: absolute;
@@ -199,15 +250,17 @@ body {
 }
 
 .hotspot-pin::after {
-  content: "+";
+  content: "i";
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 16px;
-  font-weight: 300;
+  font-size: 13px;
+  font-weight: 500;
+  font-style: italic;
+  font-family: Georgia, serif;
   line-height: 1;
 }
 
