@@ -62,9 +62,7 @@ function fitCameraToModel(model) {
   ctrls.update();
 }
 
-// ── Hotspots ────────────────────────────────────────────────────────────────
-// Shift+click on the model logs coordinates to the console so you can
-// copy them here as new hotspot entries.
+//Hotspots
 const HOTSPOTS = [
   {
     id: "conveyor",
@@ -164,7 +162,6 @@ function updateHotspotPositions() {
   });
 }
 
-// Shift+click on canvas → logs 3D hit position for easy hotspot placement
 const _raycaster = new THREE.Raycaster();
 const _mouse = new THREE.Vector2();
 renderer.domElement.addEventListener("click", (e) => {
@@ -183,15 +180,14 @@ renderer.domElement.addEventListener("click", (e) => {
     );
   }
 });
-// ── End hotspots ─────────────────────────────────────────────────────────────
 
-// ── Color picker — body ───────────────────────────────────────────────────────
+// Color picker
 const RAL_NAMES = {
-  "7016": "Gris anthracite",
-  "9016": "Blanc signalisation",
-  "5010": "Bleu gentiane",
-  "3020": "Rouge signalisation",
-  "9005": "Noir foncé",
+  7016: "Gris anthracite",
+  9016: "Blanc signalisation",
+  5010: "Bleu gentiane",
+  3020: "Rouge signalisation",
+  9005: "Noir foncé",
 };
 
 let bodyMaterial = null;
@@ -201,7 +197,9 @@ function applyBodyColor(hex) {
   bodyMaterial.color.set(hex);
 }
 
-const bodySwatches = document.querySelectorAll(".swatch:not(.swatch-light)[data-color]");
+const bodySwatches = document.querySelectorAll(
+  ".swatch:not(.swatch-light)[data-color]"
+);
 const colorRalEl = document.getElementById("color-ral");
 const colorNameEl = document.getElementById("color-name");
 const colorCustom = document.getElementById("color-custom");
@@ -226,7 +224,7 @@ colorCustom.addEventListener("input", (e) => {
   applyBodyColor(e.target.value);
 });
 
-// ── Color picker — emissive light ─────────────────────────────────────────────
+// Color picker — emissive light
 let emissiveMaterial = null;
 
 function applyLightColor(hex) {
@@ -251,7 +249,6 @@ lightCustom.addEventListener("input", (e) => {
   lightSwatches.forEach((s) => s.classList.remove("active"));
   applyLightColor(e.target.value);
 });
-// ── End color pickers ─────────────────────────────────────────────────────────
 
 let loadedModel = null;
 

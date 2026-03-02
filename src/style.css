@@ -4,7 +4,7 @@
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   background: #f0f0f0;
   overflow: hidden;
 }
@@ -23,7 +23,6 @@ body {
   height: 100% !important;
 }
 
-/* ── Color picker ── */
 .color-swatches {
   display: flex;
   flex-wrap: wrap;
@@ -39,7 +38,7 @@ body {
   cursor: pointer;
   outline: none;
   transition: transform 0.15s ease, border-color 0.15s ease;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
 .swatch:hover {
@@ -48,7 +47,8 @@ body {
 
 .swatch.active {
   border-color: #1a1a1a;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 0 0 3px rgba(255,255,255,0.9), 0 0 0 4px #1a1a1a;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 0 0 3px rgba(255, 255, 255, 0.9),
+    0 0 0 4px #1a1a1a;
 }
 
 .swatch-custom {
@@ -68,13 +68,43 @@ body {
   padding: 0;
 }
 
+.swatch[data-color="#5B686D"] {
+  background: #5b686d;
+}
+.swatch[data-color="#F1F0EB"] {
+  background: #f1f0eb;
+}
+.swatch[data-color="#1C3F6E"] {
+  background: #1c3f6e;
+}
+.swatch[data-color="#CC0605"] {
+  background: #cc0605;
+}
+.swatch[data-color="#0A0A0A"] {
+  background: #0a0a0a;
+}
+.swatch[data-color="#E7E7E7"] {
+  background: #e7e7e7;
+}
+.swatch[data-color="#FFE4B0"] {
+  background: #ffe4b0;
+}
+.swatch[data-color="#B8D4FF"] {
+  background: #b8d4ff;
+}
+.swatch[data-color="#FFB347"] {
+  background: #ffb347;
+}
+.swatch[data-color="#B8FFD0"] {
+  background: #b8ffd0;
+}
+
 .color-label {
   font-size: 13px;
   color: #888;
   margin: 0;
 }
 
-/* ── Loader ── */
 #loader {
   position: absolute;
   inset: 0;
@@ -102,10 +132,11 @@ body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* ── Title ── */
 .ui {
   position: absolute;
   top: 28px;
@@ -122,7 +153,6 @@ body {
   color: #1a1a1a;
 }
 
-/* ── Info panel — desktop: right sidebar ── */
 .info-panel {
   position: fixed;
   top: 0;
@@ -175,7 +205,6 @@ body {
   line-height: 1.7;
 }
 
-/* ── Footer ── */
 .footer {
   position: fixed;
   bottom: 16px;
@@ -204,7 +233,6 @@ body {
   border-color: #1a1a1a;
 }
 
-/* ── Hint ── */
 #hint {
   display: flex;
   flex-direction: column;
@@ -234,7 +262,13 @@ body {
   flex-shrink: 0;
 }
 
-/* ── Hotspot pins ── */
+.hint-icon--i,
+.hint-strong--i {
+  font-style: italic;
+  font-family: "Inter", Georgia, serif;
+  font-weight: 500;
+}
+
 .hotspot-pin {
   position: absolute;
   width: 26px;
@@ -260,7 +294,7 @@ body {
   font-size: 13px;
   font-weight: 500;
   font-style: italic;
-  font-family: Georgia, serif;
+  font-family: "Inter", Georgia, serif;
   line-height: 1;
 }
 
@@ -280,11 +314,16 @@ body {
 }
 
 @keyframes pulse {
-  0%   { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.8); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
 
-/* ── Popup ── */
 #popup {
   position: fixed;
   bottom: 48px;
@@ -358,7 +397,6 @@ body {
     overflow: hidden;
   }
 
-  /* Canvas takes top 55% */
   #canvas-wrap {
     width: 100%;
     height: 55vh;
@@ -374,7 +412,6 @@ body {
     letter-spacing: 2px;
   }
 
-  /* Info panel takes bottom 45% */
   .info-panel {
     top: 55vh;
     right: 0;
