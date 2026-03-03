@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet" />
     <title>Caisse</title>
     <script type="module" crossorigin src="/caisse/assets/index-DgJkp55G.js"></script>
     <link rel="stylesheet" crossorigin href="/caisse/assets/index-Bs5GQjBQ.css">
@@ -26,7 +28,10 @@
           </div>
           <div class="hint-row">
             <span class="hint-icon hint-icon--i">i</span>
-            <span>Points <strong class="hint-strong--i">i</strong> — détails du composant</span>
+            <span
+              >Points <strong class="hint-strong--i">i</strong> — détails du
+              composant</span
+            >
           </div>
         </div>
       </div>
@@ -36,6 +41,71 @@
     </div>
 
     <aside class="info-panel">
+      <section class="info-section">
+        <h2>Couleur de la caisse</h2>
+        <div class="color-swatches">
+          <button
+            class="swatch active"
+            data-color="#5B686D"
+            data-ral="7016"
+            title="RAL 7016 — Gris anthracite"></button>
+          <button
+            class="swatch"
+            data-color="#F1F0EB"
+            data-ral="9016"
+            title="RAL 9016 — Blanc signalisation"></button>
+          <button
+            class="swatch"
+            data-color="#1C3F6E"
+            data-ral="5010"
+            title="RAL 5010 — Bleu gentiane"></button>
+          <button
+            class="swatch"
+            data-color="#CC0605"
+            data-ral="3020"
+            title="RAL 3020 — Rouge signalisation"></button>
+          <button
+            class="swatch"
+            data-color="#0A0A0A"
+            data-ral="9005"
+            title="RAL 9005 — Noir foncé"></button>
+          <label class="swatch swatch-custom" title="Couleur personnalisée">
+            <input type="color" id="color-custom" value="#5B686D" />
+          </label>
+        </div>
+        <p class="color-label">
+          RAL <span id="color-ral">7016</span> —
+          <span id="color-name">Gris anthracite</span>
+        </p>
+      </section>
+      <section class="info-section">
+        <h2>Éclairage intérieur</h2>
+        <div class="color-swatches">
+          <button
+            class="swatch swatch-light active"
+            data-color="#E7E7E7"
+            title="Blanc neutre"></button>
+          <button
+            class="swatch swatch-light"
+            data-color="#FFE4B0"
+            title="Blanc chaud"></button>
+          <button
+            class="swatch swatch-light"
+            data-color="#B8D4FF"
+            title="Blanc froid"></button>
+          <button
+            class="swatch swatch-light"
+            data-color="#FFB347"
+            title="Ambre"></button>
+          <button
+            class="swatch swatch-light"
+            data-color="#B8FFD0"
+            title="Vert doux"></button>
+          <label class="swatch swatch-custom" title="Couleur personnalisée">
+            <input type="color" id="light-custom" value="#E7E7E7" />
+          </label>
+        </div>
+      </section>
       <section class="info-section">
         <h2>Caractéristiques techniques</h2>
         <ul>
@@ -54,35 +124,6 @@
             facilité d'accès PMR
           </li>
         </ul>
-      </section>
-
-      <section class="info-section">
-        <h2>Éclairage intérieur</h2>
-        <div class="color-swatches">
-          <button class="swatch swatch-light active" data-color="#E7E7E7" title="Blanc neutre"></button>
-          <button class="swatch swatch-light" data-color="#FFE4B0" title="Blanc chaud"></button>
-          <button class="swatch swatch-light" data-color="#B8D4FF" title="Blanc froid"></button>
-          <button class="swatch swatch-light" data-color="#FFB347" title="Ambre"></button>
-          <button class="swatch swatch-light" data-color="#B8FFD0" title="Vert doux"></button>
-          <label class="swatch swatch-custom" title="Couleur personnalisée">
-            <input type="color" id="light-custom" value="#E7E7E7" />
-          </label>
-        </div>
-      </section>
-
-      <section class="info-section">
-        <h2>Couleur de la caisse</h2>
-        <div class="color-swatches">
-          <button class="swatch active" data-color="#5B686D" data-ral="7016" title="RAL 7016 — Gris anthracite"></button>
-          <button class="swatch" data-color="#F1F0EB" data-ral="9016" title="RAL 9016 — Blanc signalisation"></button>
-          <button class="swatch" data-color="#1C3F6E" data-ral="5010" title="RAL 5010 — Bleu gentiane"></button>
-          <button class="swatch" data-color="#CC0605" data-ral="3020" title="RAL 3020 — Rouge signalisation"></button>
-          <button class="swatch" data-color="#0A0A0A" data-ral="9005" title="RAL 9005 — Noir foncé"></button>
-          <label class="swatch swatch-custom" title="Couleur personnalisée">
-            <input type="color" id="color-custom" value="#5B686D" />
-          </label>
-        </div>
-        <p class="color-label">RAL <span id="color-ral">7016</span> — <span id="color-name">Gris anthracite</span></p>
       </section>
 
       <section class="info-section">
@@ -112,7 +153,12 @@
       >
     </footer>
 
-    <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" hidden>
+    <div
+      id="popup"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="popup-title"
+      hidden>
       <button id="popup-close" aria-label="Fermer">&#x2715;</button>
       <p id="popup-label"></p>
       <h3 id="popup-title"></h3>
