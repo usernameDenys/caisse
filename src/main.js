@@ -15,7 +15,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-camera.position.set(3, 1, 3.5);
+camera.position.set(-3, 1.5, -3);
 camera.lookAt(0, 0, 0);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -28,6 +28,7 @@ wrap.appendChild(renderer.domElement);
 
 const ctrls = new OrbitControls(camera, renderer.domElement);
 ctrls.enableDamping = true;
+ctrls.maxPolarAngle = Math.PI / 2;
 
 const pmrem = new THREE.PMREMGenerator(renderer);
 pmrem.compileEquirectangularShader();
@@ -70,7 +71,7 @@ const HOTSPOTS = [
     title: "Bande transporteuse",
     content:
       "Bande caoutchouc avec réglage par vis avant. Marche avant ou arrière, possibilité de commande pédale.",
-    position: new THREE.Vector3(0.329, -0.129, -1.168),
+    position: new THREE.Vector3(-0.361, -0.129, 0.398),
   },
   {
     id: "motor",
@@ -78,7 +79,7 @@ const HOTSPOTS = [
     title: "Moteur 220 V EU",
     content:
       "Moteur monophasé 220 V normes EU. Boîtier de commande avec fonction lanterneau 2 couleurs.",
-    position: new THREE.Vector3(0.169, -0.35, -0.193),
+    position: new THREE.Vector3(-0.302, -0.635, 0.189),
   },
   {
     id: "bac",
@@ -86,7 +87,7 @@ const HOTSPOTS = [
     title: "Bac inox",
     content:
       "Bac arrière en inox pour nettoyage rapide et évacuation rapide des articles.",
-    position: new THREE.Vector3(0.066, -0.15, 1.111),
+    position: new THREE.Vector3(-0.446, -0.138, -0.975),
   },
   {
     id: "protection",
@@ -94,7 +95,7 @@ const HOTSPOTS = [
     title: "Écran de protection",
     content:
       "Protection du personnel en plexiglas transparent. Fixation rigide sur la base de la caisse pour une stabilité optimale.",
-    position: new THREE.Vector3(0.65, 0.726, 0.241),
+    position: new THREE.Vector3(-0.648, 0.617, -0.223),
   },
 ];
 
@@ -250,11 +251,44 @@ lightCustom.addEventListener("input", (e) => {
   applyLightColor(e.target.value);
 });
 
+// Group switching
+const BELT_GROUPS = ["Group_Belt_L", "Group_Belt_M", "Group_Belt_S"];
+const TRAY_GROUPS = ["Group_Tray_700_L", "Group_Tray_700_M", "Group_Tray_1250_L"];
+const sceneGroups = {};
+
+function setBelt(size) {
+  BELT_GROUPS.forEach((name) => {
+    if (sceneGroups[name]) sceneGroups[name].visible = name === `Group_Belt_${size}`;
+  });
+}
+
+function setTray(name) {
+  TRAY_GROUPS.forEach((n) => {
+    if (sceneGroups[n]) sceneGroups[n].visible = n === `Group_Tray_${name}`;
+  });
+}
+
+document.querySelectorAll(".opt-btn[data-belt]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".opt-btn[data-belt]").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    setBelt(btn.dataset.belt);
+  });
+});
+
+document.querySelectorAll(".opt-btn[data-tray]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".opt-btn[data-tray]").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    setTray(btn.dataset.tray);
+  });
+});
+
 let loadedModel = null;
 
 const loader = new GLTFLoader();
 loader.load(
-  "./assets/Caisse-glb.glb",
+  "./assets/Caisse3js.glb",
   (gltf) => {
     loadedModel = gltf.scenes[0];
     const box = new THREE.Box3().setFromObject(loadedModel);
@@ -266,10 +300,16 @@ loader.load(
     setTimeout(() => loader_el.remove(), 400);
     createHotspotPins();
     loadedModel.traverse((obj) => {
+      if (obj.name && (BELT_GROUPS.includes(obj.name) || TRAY_GROUPS.includes(obj.name))) {
+        sceneGroups[obj.name] = obj;
+        obj.visible = false;
+      }
       if (!obj.isMesh) return;
       if (obj.material?.name === "RAL_7016") bodyMaterial = obj.material;
       if (obj.material?.name === "Emissive") emissiveMaterial = obj.material;
     });
+    setBelt("L");
+    setTray("1250_L");
   },
   undefined,
   (error) => {
