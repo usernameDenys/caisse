@@ -10,13 +10,12 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
       rel="stylesheet" />
     <title>Caisse</title>
-    <script type="module" crossorigin src="/caisse/assets/index-DgJkp55G.js"></script>
-    <link rel="stylesheet" crossorigin href="/caisse/assets/index-Bs5GQjBQ.css">
+    <script type="module" crossorigin src="/caisse/assets/index-Cp1cKVPe.js"></script>
+    <link rel="stylesheet" crossorigin href="/caisse/assets/index-CWoqVSYf.css">
   </head>
   <body>
     <div id="canvas-wrap">
       <div class="ui">
-        <h1>Caisse</h1>
         <div id="hint">
           <div class="hint-row">
             <span class="hint-icon">⟳</span>
@@ -41,6 +40,38 @@
     </div>
 
     <aside class="info-panel">
+      <div class="panel-header">
+        <div class="panel-header-text">
+          <p class="panel-subtitle">Caisse de supermarché</p>
+          <h1 class="panel-title">Caisse Standard</h1>
+        </div>
+        <a href="#" class="cta-btn">Demander un devis</a>
+      </div>
+
+      <section class="info-section">
+        <h2>Sens de caisse</h2>
+        <div class="option-btns">
+          <button class="opt-btn active" data-mirror="right">Gaucher</button>
+          <button class="opt-btn" data-mirror="left">Droitier</button>
+        </div>
+      </section>
+
+      <section class="info-section">
+        <h2>Tapis</h2>
+        <div class="option-btns">
+          <button class="opt-btn active" data-belt="L">1700mm</button>
+          <button class="opt-btn" data-belt="M">1400mm</button>
+          <button class="opt-btn" data-belt="S">900mm</button>
+        </div>
+      </section>
+      <section class="info-section">
+        <h2>Module Bac</h2>
+        <div class="option-btns">
+          <button class="opt-btn active" data-tray="1250_L">1200x1100mm</button>
+          <button class="opt-btn" data-tray="700_L">700x1100mm</button>
+          <button class="opt-btn" data-tray="700_M">700x600mm</button>
+        </div>
+      </section>
       <section class="info-section">
         <h2>Couleur de la caisse</h2>
         <div class="color-swatches">
@@ -107,6 +138,32 @@
         </div>
       </section>
       <section class="info-section">
+        <button
+          class="accordion-btn"
+          aria-expanded="false"
+          aria-controls="normes-body">
+          Conformité aux normes
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body" id="normes-body" hidden>
+          <ul class="norm-links">
+            <li>NF X35-701 — Prévention des troubles musculo-squelettiques</li>
+            <li>
+              NF EN ISO 14738 — Prescriptions anthropométriques relatives à la
+              conception des postes de travail sur les machines
+            </li>
+            <li>
+              NF EN ISO 9241-400 — Ergonomie de l'interaction homme-système
+            </li>
+            <li>NF EN 12464-1 — Lumière et éclairage des lieux de travail</li>
+            <li>
+              Art. R.111-19-2 CCH — Accessibilité aux Personnes à Mobilité
+              Réduite
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="info-section">
         <h2>Caractéristiques techniques</h2>
         <ul>
           <li>Structure tôle dégraissé</li>
@@ -140,6 +197,30 @@
           <li>Jupe complète de protection côté passage clientèle</li>
         </ul>
       </section>
+
+      <!-- <section class="info-section">
+        <h2>Galerie</h2>
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="./assets/gallery-1.jpg" alt="Caisse vue de face" />
+          </figure>
+          <figure class="gallery-item">
+            <img src="./assets/gallery-2.jpg" alt="Caisse vue de côté" />
+          </figure>
+          <figure class="gallery-item">
+            <img src="./assets/gallery-3.jpg" alt="Détail tapis" />
+          </figure>
+          <figure class="gallery-item">
+            <img src="./assets/gallery-4.jpg" alt="Détail bac inox" />
+          </figure>
+          <figure class="gallery-item">
+            <img src="./assets/gallery-5.jpg" alt="Vue d'ensemble" />
+          </figure>
+          <figure class="gallery-item">
+            <img src="./assets/gallery-6.jpg" alt="Installation" />
+          </figure>
+        </div>
+      </section> -->
     </aside>
 
     <footer class="footer">
