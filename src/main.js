@@ -6,6 +6,15 @@ import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
 const wrap = document.getElementById("canvas-wrap");
 const loader_el = document.getElementById("loader");
 
+document.querySelectorAll(".accordion-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    const body = document.getElementById(btn.getAttribute("aria-controls"));
+    btn.setAttribute("aria-expanded", String(!expanded));
+    body.hidden = expanded;
+  });
+});
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0f0f0);
 
@@ -72,6 +81,7 @@ const HOTSPOTS = [
     content:
       "Bande caoutchouc avec réglage par vis avant. Marche avant ou arrière, possibilité de commande pédale.",
     position: new THREE.Vector3(-0.361, -0.129, 0.398),
+    positionLeft: new THREE.Vector3(-0.341, -0.129, 0.254),
   },
   {
     id: "motor",
@@ -80,6 +90,7 @@ const HOTSPOTS = [
     content:
       "Moteur monophasé 220 V normes EU. Boîtier de commande avec fonction lanterneau 2 couleurs.",
     position: new THREE.Vector3(-0.302, -0.635, 0.189),
+    positionLeft: new THREE.Vector3(-0.190, -0.438, 0.269),
   },
   {
     id: "bac",
@@ -88,6 +99,7 @@ const HOTSPOTS = [
     content:
       "Bac arrière en inox pour nettoyage rapide et évacuation rapide des articles.",
     position: new THREE.Vector3(-0.446, -0.138, -0.975),
+    positionLeft: new THREE.Vector3(0.865, -0.129, 0.330),
   },
   {
     id: "protection",
@@ -96,6 +108,7 @@ const HOTSPOTS = [
     content:
       "Protection du personnel en plexiglas transparent. Fixation rigide sur la base de la caisse pour une stabilité optimale.",
     position: new THREE.Vector3(-0.648, 0.617, -0.223),
+    positionLeft: new THREE.Vector3(0.236, 0.612, 0.648),
   },
 ];
 
@@ -107,6 +120,7 @@ const popupContent = document.getElementById("popup-content");
 const popupClose = document.getElementById("popup-close");
 
 let activePin = null;
+let isMirroredLeft = false;
 
 function showPopup(hs, pinEl) {
   if (activePin) activePin.classList.remove("active");
@@ -127,6 +141,10 @@ function hidePopup() {
 popupClose.addEventListener("click", hidePopup);
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") hidePopup();
+  if (e.key === "c" || e.key === "C") {
+    const p = camera.position;
+    console.log(`📷 camera.position.set(${p.x.toFixed(3)}, ${p.y.toFixed(3)}, ${p.z.toFixed(3)})`);
+  }
 });
 
 function createHotspotPins() {
@@ -150,7 +168,8 @@ function createHotspotPins() {
 function updateHotspotPositions() {
   HOTSPOTS.forEach((hs) => {
     if (!hs.el) return;
-    const pos = hs.position.clone().project(camera);
+    const activePos = (isMirroredLeft && hs.positionLeft) ? hs.positionLeft : hs.position;
+    const pos = activePos.clone().project(camera);
     if (pos.z > 1) {
       hs.el.style.visibility = "hidden";
       return;
@@ -251,14 +270,58 @@ lightCustom.addEventListener("input", (e) => {
   applyLightColor(e.target.value);
 });
 
+// Mirror
+document.querySelectorAll(".opt-btn[data-mirror]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document
+      .querySelectorAll(".opt-btn[data-mirror]")
+      .forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    const isLeft = btn.dataset.mirror === "left";
+    isMirroredLeft = isLeft;
+    if (loadedModel) {
+      loadedModel.scale.x = isLeft ? -1 : 1;
+      loadedModel.rotation.y = isLeft ? Math.PI * 1.5 : 0;
+      loadedModel.position.set(0, 0, 0);
+      loadedModel.updateMatrixWorld();
+      const mirrorBox = new THREE.Box3().setFromObject(loadedModel);
+      const mirrorCenter = mirrorBox.getCenter(new THREE.Vector3());
+      loadedModel.position.sub(mirrorCenter);
+      loadedModel.traverse((obj) => {
+        if (obj.isMesh && obj.material) {
+          const mats = Array.isArray(obj.material)
+            ? obj.material
+            : [obj.material];
+          mats.forEach((m) => {
+            m.side = THREE.DoubleSide;
+          });
+        }
+      });
+    }
+    if (isLeft) {
+      camera.position.set(3.844, 1.847, 3.667);
+    } else {
+      camera.position.set(-3, 1.5, -3);
+    }
+    ctrls.target.set(0, 0, 0);
+    ctrls.update();
+    if (loadedModel) fitCameraToModel(loadedModel);
+  });
+});
+
 // Group switching
 const BELT_GROUPS = ["Group_Belt_L", "Group_Belt_M", "Group_Belt_S"];
-const TRAY_GROUPS = ["Group_Tray_700_L", "Group_Tray_700_M", "Group_Tray_1250_L"];
+const TRAY_GROUPS = [
+  "Group_Tray_700_L",
+  "Group_Tray_700_M",
+  "Group_Tray_1250_L",
+];
 const sceneGroups = {};
 
 function setBelt(size) {
   BELT_GROUPS.forEach((name) => {
-    if (sceneGroups[name]) sceneGroups[name].visible = name === `Group_Belt_${size}`;
+    if (sceneGroups[name])
+      sceneGroups[name].visible = name === `Group_Belt_${size}`;
   });
 }
 
@@ -270,7 +333,9 @@ function setTray(name) {
 
 document.querySelectorAll(".opt-btn[data-belt]").forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".opt-btn[data-belt]").forEach((b) => b.classList.remove("active"));
+    document
+      .querySelectorAll(".opt-btn[data-belt]")
+      .forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     setBelt(btn.dataset.belt);
   });
@@ -278,7 +343,9 @@ document.querySelectorAll(".opt-btn[data-belt]").forEach((btn) => {
 
 document.querySelectorAll(".opt-btn[data-tray]").forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".opt-btn[data-tray]").forEach((b) => b.classList.remove("active"));
+    document
+      .querySelectorAll(".opt-btn[data-tray]")
+      .forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     setTray(btn.dataset.tray);
   });
@@ -300,7 +367,10 @@ loader.load(
     setTimeout(() => loader_el.remove(), 400);
     createHotspotPins();
     loadedModel.traverse((obj) => {
-      if (obj.name && (BELT_GROUPS.includes(obj.name) || TRAY_GROUPS.includes(obj.name))) {
+      if (
+        obj.name &&
+        (BELT_GROUPS.includes(obj.name) || TRAY_GROUPS.includes(obj.name))
+      ) {
         sceneGroups[obj.name] = obj;
         obj.visible = false;
       }

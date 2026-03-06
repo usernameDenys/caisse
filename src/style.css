@@ -257,6 +257,58 @@ body {
   box-shadow: 0 2px 6px rgba(29, 111, 222, 0.3);
 }
 
+.accordion-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #2a2a2a;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.accordion-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.accordion-btn[aria-expanded="true"] {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-color: transparent;
+}
+
+.accordion-icon {
+  font-size: 18px;
+  font-weight: 300;
+  color: #999;
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+
+.accordion-btn[aria-expanded="true"] .accordion-icon {
+  transform: rotate(45deg);
+}
+
+.accordion-body {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+  padding: 14px;
+}
+
+.accordion-body[hidden] {
+  display: none;
+}
+
 .norm-links {
   list-style: none;
   display: flex;
@@ -265,9 +317,11 @@ body {
 }
 
 .norm-links li {
-  font-size: 14px;
+  font-size: 13px;
   padding-left: 14px;
   position: relative;
+  color: #2a2a2a;
+  line-height: 1.5;
 }
 
 .norm-links li::before {
