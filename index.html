@@ -4,41 +4,54 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Configurateur 3D interactif de la Caisse Standard — personnalisez le sens, le tapis, le bac, la couleur et l'éclairage." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
       rel="stylesheet" />
     <link rel="stylesheet" href="/src/style.css" />
-    <title>Caisse</title>
+    <title>Caisse Standard — Configurateur 3D</title>
   </head>
   <body>
-    <div id="canvas-wrap">
-      <div class="ui">
-        <div id="hint">
-          <div class="hint-row">
-            <span class="hint-icon">⟳</span>
-            <span>Glisser pour faire pivoter</span>
-          </div>
-          <div class="hint-row">
-            <span class="hint-icon">⊕</span>
-            <span>Molette / pincement pour zoomer</span>
-          </div>
-          <div class="hint-row">
-            <span class="hint-icon hint-icon--i">i</span>
-            <span
-              >Points <strong class="hint-strong--i">i</strong> — détails du
-              composant</span
-            >
+    <main>
+      <div
+        id="canvas-wrap"
+        role="region"
+        aria-label="Visualiseur 3D interactif"
+        aria-describedby="hint">
+        <div class="ui">
+          <div id="hint" role="note" aria-label="Conseils de navigation">
+            <div class="hint-row">
+              <span class="hint-icon" aria-hidden="true">⟳</span>
+              <span>Glisser pour faire pivoter</span>
+            </div>
+            <div class="hint-row">
+              <span class="hint-icon" aria-hidden="true">⊕</span>
+              <span>Molette / pincement pour zoomer</span>
+            </div>
+            <div class="hint-row">
+              <span class="hint-icon hint-icon--i" aria-hidden="true">i</span>
+              <span
+                >Points <strong class="hint-strong--i">i</strong> — détails du
+                composant</span
+              >
+            </div>
           </div>
         </div>
+        <div
+          id="loader"
+          role="status"
+          aria-live="polite"
+          aria-label="Chargement du modèle 3D">
+          <div class="loader-spinner" aria-hidden="true"></div>
+        </div>
       </div>
-      <div id="loader">
-        <div class="loader-spinner"></div>
-      </div>
-    </div>
+    </main>
 
-    <aside class="info-panel">
+    <aside class="info-panel" aria-label="Panneau de configuration">
       <div class="panel-header">
         <div class="panel-header-text">
           <p class="panel-subtitle">Caisse de supermarché</p>
@@ -47,104 +60,124 @@
         <a href="#" class="cta-btn">Demander un devis</a>
       </div>
 
-      <section class="info-section">
-        <h2>Sens de caisse</h2>
-        <div class="option-btns">
-          <button class="opt-btn active" data-mirror="right">Gaucher</button>
-          <button class="opt-btn" data-mirror="left">Droitier</button>
+      <section class="info-section" aria-labelledby="section-mirror">
+        <h2 id="section-mirror">Sens de caisse</h2>
+        <div class="option-btns" role="group" aria-labelledby="section-mirror">
+          <button class="opt-btn active" data-mirror="right" aria-pressed="true">Gaucher</button>
+          <button class="opt-btn" data-mirror="left" aria-pressed="false">Droitier</button>
         </div>
       </section>
 
-      <section class="info-section">
-        <h2>Tapis</h2>
-        <div class="option-btns">
-          <button class="opt-btn active" data-belt="L">1700mm</button>
-          <button class="opt-btn" data-belt="M">1400mm</button>
-          <button class="opt-btn" data-belt="S">900mm</button>
+      <section class="info-section" aria-labelledby="section-belt">
+        <h2 id="section-belt">Tapis</h2>
+        <div class="option-btns" role="group" aria-labelledby="section-belt">
+          <button class="opt-btn active" data-belt="L" aria-pressed="true">1700mm</button>
+          <button class="opt-btn" data-belt="M" aria-pressed="false">1400mm</button>
+          <button class="opt-btn" data-belt="S" aria-pressed="false">900mm</button>
         </div>
       </section>
-      <section class="info-section">
-        <h2>Module Bac</h2>
-        <div class="option-btns">
-          <button class="opt-btn active" data-tray="1250_L">1200x1100mm</button>
-          <button class="opt-btn" data-tray="700_L">700x1100mm</button>
-          <button class="opt-btn" data-tray="700_M">700x600mm</button>
+
+      <section class="info-section" aria-labelledby="section-tray">
+        <h2 id="section-tray">Module Bac</h2>
+        <div class="option-btns" role="group" aria-labelledby="section-tray">
+          <button class="opt-btn active" data-tray="1250_L" aria-pressed="true">1200x1100mm</button>
+          <button class="opt-btn" data-tray="700_L" aria-pressed="false">700x1100mm</button>
+          <button class="opt-btn" data-tray="700_M" aria-pressed="false">700x600mm</button>
         </div>
       </section>
-      <section class="info-section">
-        <h2>Couleur de la caisse</h2>
-        <div class="color-swatches">
+
+      <section class="info-section" aria-labelledby="section-color">
+        <h2 id="section-color">Couleur de la caisse</h2>
+        <div class="color-swatches" role="group" aria-labelledby="section-color">
           <button
             class="swatch active"
             data-color="#5B686D"
             data-ral="7016"
-            title="RAL 7016 — Gris anthracite"></button>
+            aria-label="RAL 7016 — Gris anthracite"
+            aria-pressed="true"></button>
           <button
             class="swatch"
             data-color="#F1F0EB"
             data-ral="9016"
-            title="RAL 9016 — Blanc signalisation"></button>
+            aria-label="RAL 9016 — Blanc signalisation"
+            aria-pressed="false"></button>
           <button
             class="swatch"
             data-color="#1C3F6E"
             data-ral="5010"
-            title="RAL 5010 — Bleu gentiane"></button>
+            aria-label="RAL 5010 — Bleu gentiane"
+            aria-pressed="false"></button>
           <button
             class="swatch"
             data-color="#CC0605"
             data-ral="3020"
-            title="RAL 3020 — Rouge signalisation"></button>
+            aria-label="RAL 3020 — Rouge signalisation"
+            aria-pressed="false"></button>
           <button
             class="swatch"
             data-color="#0A0A0A"
             data-ral="9005"
-            title="RAL 9005 — Noir foncé"></button>
-          <label class="swatch swatch-custom" title="Couleur personnalisée">
-            <input type="color" id="color-custom" value="#5B686D" />
+            aria-label="RAL 9005 — Noir foncé"
+            aria-pressed="false"></button>
+          <label class="swatch swatch-custom" aria-label="Couleur personnalisée">
+            <input type="color" id="color-custom" value="#5B686D" aria-label="Choisir une couleur personnalisée" />
           </label>
         </div>
-        <p class="color-label">
+        <p class="color-label" aria-live="polite" aria-atomic="true">
           RAL <span id="color-ral">7016</span> —
           <span id="color-name">Gris anthracite</span>
         </p>
       </section>
-      <section class="info-section">
-        <h2>Éclairage intérieur</h2>
-        <div class="color-swatches">
+
+      <section class="info-section" aria-labelledby="section-light">
+        <h2 id="section-light">Éclairage intérieur</h2>
+        <div class="color-swatches" role="group" aria-labelledby="section-light">
           <button
             class="swatch swatch-light active"
             data-color="#E7E7E7"
-            title="Blanc neutre"></button>
+            aria-label="Blanc neutre"
+            aria-pressed="true"></button>
           <button
             class="swatch swatch-light"
             data-color="#FFE4B0"
-            title="Blanc chaud"></button>
+            aria-label="Blanc chaud"
+            aria-pressed="false"></button>
           <button
             class="swatch swatch-light"
             data-color="#B8D4FF"
-            title="Blanc froid"></button>
+            aria-label="Blanc froid"
+            aria-pressed="false"></button>
           <button
             class="swatch swatch-light"
             data-color="#FFB347"
-            title="Ambre"></button>
+            aria-label="Ambre"
+            aria-pressed="false"></button>
           <button
             class="swatch swatch-light"
             data-color="#B8FFD0"
-            title="Vert doux"></button>
-          <label class="swatch swatch-custom" title="Couleur personnalisée">
-            <input type="color" id="light-custom" value="#E7E7E7" />
+            aria-label="Vert doux"
+            aria-pressed="false"></button>
+          <label class="swatch swatch-custom" aria-label="Couleur personnalisée">
+            <input type="color" id="light-custom" value="#E7E7E7" aria-label="Choisir une couleur d'éclairage personnalisée" />
           </label>
         </div>
       </section>
-      <section class="info-section">
+
+      <section class="info-section" aria-labelledby="normes-btn">
         <button
+          id="normes-btn"
           class="accordion-btn"
           aria-expanded="false"
           aria-controls="normes-body">
           Conformité aux normes
-          <span class="accordion-icon">+</span>
+          <span class="accordion-icon" aria-hidden="true">+</span>
         </button>
-        <div class="accordion-body" id="normes-body" hidden>
+        <div
+          class="accordion-body"
+          id="normes-body"
+          role="region"
+          aria-labelledby="normes-btn"
+          hidden>
           <ul class="norm-links">
             <li>NF X35-701 — Prévention des troubles musculo-squelettiques</li>
             <li>
@@ -162,8 +195,9 @@
           </ul>
         </div>
       </section>
-      <section class="info-section">
-        <h2>Caractéristiques techniques</h2>
+
+      <section class="info-section" aria-labelledby="section-tech">
+        <h2 id="section-tech">Caractéristiques techniques</h2>
         <ul>
           <li>Structure tôle dégraissé</li>
           <li>Laminage à froid</li>
@@ -182,8 +216,8 @@
         </ul>
       </section>
 
-      <section class="info-section">
-        <h2>Fonctionnement</h2>
+      <section class="info-section" aria-labelledby="section-fonct">
+        <h2 id="section-fonct">Fonctionnement</h2>
         <ul>
           <li>
             Boîtier de commande avec fonction lanterneau 2 couleurs, tapis
@@ -196,39 +230,18 @@
           <li>Jupe complète de protection côté passage clientèle</li>
         </ul>
       </section>
-
-      <!-- <section class="info-section">
-        <h2>Galerie</h2>
-        <div class="gallery-grid">
-          <figure class="gallery-item">
-            <img src="./assets/gallery-1.jpg" alt="Caisse vue de face" />
-          </figure>
-          <figure class="gallery-item">
-            <img src="./assets/gallery-2.jpg" alt="Caisse vue de côté" />
-          </figure>
-          <figure class="gallery-item">
-            <img src="./assets/gallery-3.jpg" alt="Détail tapis" />
-          </figure>
-          <figure class="gallery-item">
-            <img src="./assets/gallery-4.jpg" alt="Détail bac inox" />
-          </figure>
-          <figure class="gallery-item">
-            <img src="./assets/gallery-5.jpg" alt="Vue d'ensemble" />
-          </figure>
-          <figure class="gallery-item">
-            <img src="./assets/gallery-6.jpg" alt="Installation" />
-          </figure>
-        </div>
-      </section> -->
     </aside>
 
     <footer class="footer">
-      <span>© 2026 </span>
-      <span class="footer-sep">·</span>
+      <span>© 2026</span>
+      <span class="footer-sep" aria-hidden="true">·</span>
       <span
         >Made by
-        <a href="https://denys-holenko.com" target="_blank" rel="noopener"
-          >Denys Holenko</a
+        <a
+          href="https://denys-holenko.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Denys Holenko<span class="sr-only"> (nouvelle fenêtre)</span></a
         ></span
       >
     </footer>
@@ -238,8 +251,9 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="popup-title"
+      aria-describedby="popup-content"
       hidden>
-      <button id="popup-close" aria-label="Fermer">&#x2715;</button>
+      <button id="popup-close" aria-label="Fermer la fenêtre de détails">&#x2715;</button>
       <p id="popup-label"></p>
       <h3 id="popup-title"></h3>
       <p id="popup-content"></p>

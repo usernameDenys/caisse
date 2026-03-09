@@ -38,6 +38,8 @@ wrap.appendChild(renderer.domElement);
 const ctrls = new OrbitControls(camera, renderer.domElement);
 ctrls.enableDamping = true;
 ctrls.maxPolarAngle = Math.PI / 2;
+ctrls.minDistance = 1.5;
+ctrls.maxTargetRadius = 1.0;
 
 const pmrem = new THREE.PMREMGenerator(renderer);
 pmrem.compileEquirectangularShader();
@@ -90,7 +92,7 @@ const HOTSPOTS = [
     content:
       "Moteur monophasé 220 V normes EU. Boîtier de commande avec fonction lanterneau 2 couleurs.",
     position: new THREE.Vector3(-0.302, -0.635, 0.189),
-    positionLeft: new THREE.Vector3(-0.190, -0.438, 0.269),
+    positionLeft: new THREE.Vector3(-0.19, -0.438, 0.269),
   },
   {
     id: "bac",
@@ -99,7 +101,7 @@ const HOTSPOTS = [
     content:
       "Bac arrière en inox pour nettoyage rapide et évacuation rapide des articles.",
     position: new THREE.Vector3(-0.446, -0.138, -0.975),
-    positionLeft: new THREE.Vector3(0.865, -0.129, 0.330),
+    positionLeft: new THREE.Vector3(0.865, -0.129, 0.33),
   },
   {
     id: "protection",
@@ -143,7 +145,11 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") hidePopup();
   if (e.key === "c" || e.key === "C") {
     const p = camera.position;
-    console.log(`📷 camera.position.set(${p.x.toFixed(3)}, ${p.y.toFixed(3)}, ${p.z.toFixed(3)})`);
+    console.log(
+      `📷 camera.position.set(${p.x.toFixed(3)}, ${p.y.toFixed(
+        3
+      )}, ${p.z.toFixed(3)})`
+    );
   }
 });
 
@@ -168,7 +174,8 @@ function createHotspotPins() {
 function updateHotspotPositions() {
   HOTSPOTS.forEach((hs) => {
     if (!hs.el) return;
-    const activePos = (isMirroredLeft && hs.positionLeft) ? hs.positionLeft : hs.position;
+    const activePos =
+      isMirroredLeft && hs.positionLeft ? hs.positionLeft : hs.position;
     const pos = activePos.clone().project(camera);
     if (pos.z > 1) {
       hs.el.style.visibility = "hidden";
@@ -226,8 +233,9 @@ const colorCustom = document.getElementById("color-custom");
 
 bodySwatches.forEach((btn) => {
   btn.addEventListener("click", () => {
-    bodySwatches.forEach((s) => s.classList.remove("active"));
+    bodySwatches.forEach((s) => { s.classList.remove("active"); s.setAttribute("aria-pressed", "false"); });
     btn.classList.add("active");
+    btn.setAttribute("aria-pressed", "true");
     const hex = btn.dataset.color;
     const ral = btn.dataset.ral;
     colorCustom.value = hex;
@@ -238,7 +246,7 @@ bodySwatches.forEach((btn) => {
 });
 
 colorCustom.addEventListener("input", (e) => {
-  bodySwatches.forEach((s) => s.classList.remove("active"));
+  bodySwatches.forEach((s) => { s.classList.remove("active"); s.setAttribute("aria-pressed", "false"); });
   colorRalEl.textContent = "—";
   colorNameEl.textContent = "Personnalisé";
   applyBodyColor(e.target.value);
@@ -258,15 +266,16 @@ const lightCustom = document.getElementById("light-custom");
 
 lightSwatches.forEach((btn) => {
   btn.addEventListener("click", () => {
-    lightSwatches.forEach((s) => s.classList.remove("active"));
+    lightSwatches.forEach((s) => { s.classList.remove("active"); s.setAttribute("aria-pressed", "false"); });
     btn.classList.add("active");
+    btn.setAttribute("aria-pressed", "true");
     lightCustom.value = btn.dataset.color;
     applyLightColor(btn.dataset.color);
   });
 });
 
 lightCustom.addEventListener("input", (e) => {
-  lightSwatches.forEach((s) => s.classList.remove("active"));
+  lightSwatches.forEach((s) => { s.classList.remove("active"); s.setAttribute("aria-pressed", "false"); });
   applyLightColor(e.target.value);
 });
 
@@ -275,8 +284,9 @@ document.querySelectorAll(".opt-btn[data-mirror]").forEach((btn) => {
   btn.addEventListener("click", () => {
     document
       .querySelectorAll(".opt-btn[data-mirror]")
-      .forEach((b) => b.classList.remove("active"));
+      .forEach((b) => { b.classList.remove("active"); b.setAttribute("aria-pressed", "false"); });
     btn.classList.add("active");
+    btn.setAttribute("aria-pressed", "true");
     const isLeft = btn.dataset.mirror === "left";
     isMirroredLeft = isLeft;
     if (loadedModel) {
@@ -335,8 +345,9 @@ document.querySelectorAll(".opt-btn[data-belt]").forEach((btn) => {
   btn.addEventListener("click", () => {
     document
       .querySelectorAll(".opt-btn[data-belt]")
-      .forEach((b) => b.classList.remove("active"));
+      .forEach((b) => { b.classList.remove("active"); b.setAttribute("aria-pressed", "false"); });
     btn.classList.add("active");
+    btn.setAttribute("aria-pressed", "true");
     setBelt(btn.dataset.belt);
   });
 });
@@ -345,8 +356,9 @@ document.querySelectorAll(".opt-btn[data-tray]").forEach((btn) => {
   btn.addEventListener("click", () => {
     document
       .querySelectorAll(".opt-btn[data-tray]")
-      .forEach((b) => b.classList.remove("active"));
+      .forEach((b) => { b.classList.remove("active"); b.setAttribute("aria-pressed", "false"); });
     btn.classList.add("active");
+    btn.setAttribute("aria-pressed", "true");
     setTray(btn.dataset.tray);
   });
 });
