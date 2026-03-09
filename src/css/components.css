@@ -1,0 +1,211 @@
+/* Option buttons */
+.option-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.opt-btn {
+  flex: 1;
+  padding: 7px 4px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.opt-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1a1a1a;
+}
+
+.opt-btn.active {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #fff;
+}
+
+/* Color swatches */
+.color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+.swatch:hover {
+  transform: scale(1.15);
+}
+
+.swatch.active {
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 0 0 3px rgba(255, 255, 255, 0.9),
+    0 0 0 4px #1a1a1a;
+}
+
+.swatch-custom {
+  background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
+  cursor: pointer;
+  position: relative;
+}
+
+.swatch-custom input[type="color"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.swatch[data-color="#5B686D"] { background: #5b686d; }
+.swatch[data-color="#F1F0EB"] { background: #f1f0eb; }
+.swatch[data-color="#1C3F6E"] { background: #1c3f6e; }
+.swatch[data-color="#CC0605"] { background: #cc0605; }
+.swatch[data-color="#0A0A0A"] { background: #0a0a0a; }
+.swatch[data-color="#E7E7E7"] { background: #e7e7e7; }
+.swatch[data-color="#FFE4B0"] { background: #ffe4b0; }
+.swatch[data-color="#B8D4FF"] { background: #b8d4ff; }
+.swatch[data-color="#FFB347"] { background: #ffb347; }
+.swatch[data-color="#B8FFD0"] { background: #b8ffd0; }
+
+.color-label {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+}
+
+/* CTA button */
+.cta-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #1d6fde;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(29, 111, 222, 0.35);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.cta-btn:hover {
+  background: #1559c0;
+  box-shadow: 0 4px 16px rgba(29, 111, 222, 0.45);
+  transform: translateY(-1px);
+}
+
+.cta-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(29, 111, 222, 0.3);
+}
+
+/* Accordion */
+.accordion-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #2a2a2a;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.accordion-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.accordion-btn[aria-expanded="true"] {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-color: transparent;
+}
+
+.accordion-icon {
+  font-size: 18px;
+  font-weight: 300;
+  color: #999;
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+
+.accordion-btn[aria-expanded="true"] .accordion-icon {
+  transform: rotate(45deg);
+}
+
+.accordion-body {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+  padding: 14px;
+}
+
+.accordion-body[hidden] {
+  display: none;
+}
+
+.norm-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.norm-links li {
+  font-size: 13px;
+  padding-left: 14px;
+  position: relative;
+  color: #2a2a2a;
+  line-height: 1.5;
+}
+
+.norm-links li::before {
+  content: "↗";
+  position: absolute;
+  left: 0;
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.norm-links a {
+  color: #2a2a2a;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.norm-links a:hover {
+  color: #1a1a1a;
+  border-color: #1a1a1a;
+}

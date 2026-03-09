@@ -55,3 +55,13 @@ window.addEventListener("resize", () => {
   renderer.setSize(wrap.clientWidth, wrap.clientHeight);
   if (state.loadedModel) fitCameraToModel(state.loadedModel);
 });
+
+// ── Cookie banner ──────────────────────────────────────────────────────────
+const cookieBanner = document.getElementById("cookie-banner");
+if (!localStorage.getItem("cookie-notice-accepted")) {
+  cookieBanner.hidden = false;
+}
+document.getElementById("cookie-accept").addEventListener("click", () => {
+  localStorage.setItem("cookie-notice-accepted", "1");
+  cookieBanner.hidden = true;
+});
