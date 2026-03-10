@@ -18,29 +18,33 @@
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:url" content="https://mag3d.fr/" />
     <meta property="og:site_name" content="Caisse Standard — mag3d.fr" />
-    <meta property="og:title" content="Caisse Standard de supermarché — Configurateur 3D" />
-    <meta property="og:description" content="Configurez votre caisse de supermarché en 3D : tapis, couleur RAL, module bac, éclairage. Demandez un devis en ligne." />
+    <meta
+      property="og:title"
+      content="Caisse Standard de supermarché — Configurateur 3D" />
+    <meta
+      property="og:description"
+      content="Configurez votre caisse de supermarché en 3D : tapis, couleur RAL, module bac, éclairage. Demandez un devis en ligne." />
 
     <!-- JSON-LD -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Caisse Standard de supermarché",
-      "description": "Caisse de supermarché configurable : structure tôle dégraissée, laminage à froid, peinture époxy RAL, tapis transporteur 900–1700 mm, moteur 220V monophasé, châssis mécanosoudé.",
-      "brand": { "@type": "Brand", "name": "DENYS HOLENKO" },
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock",
-        "seller": {
-          "@type": "Person",
-          "name": "Denys Holenko",
-          "email": "denysgolenko@gmail.com"
-        }
-      },
-      "url": "https://mag3d.fr/"
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Caisse Standard de supermarché",
+        "description": "Caisse de supermarché configurable : structure tôle dégraissée, laminage à froid, peinture époxy RAL, tapis transporteur 900–1700 mm, moteur 220V monophasé, châssis mécanosoudé.",
+        "brand": { "@type": "Brand", "name": "DENYS HOLENKO" },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Person",
+            "name": "Denys Holenko",
+            "email": "denysgolenko@gmail.com"
+          }
+        },
+        "url": "https://mag3d.fr/"
+      }
     </script>
 
     <link rel="stylesheet" href="/src/style.css" />
@@ -87,38 +91,62 @@
           <p class="panel-subtitle">Caisse de supermarché</p>
           <h1 class="panel-title">Caisse Standard</h1>
         </div>
-        <button id="devis-btn" class="cta-btn" type="button">Demander un devis</button>
+        <button id="devis-btn" class="cta-btn" type="button">
+          Demander un devis
+        </button>
       </div>
 
       <section class="info-section" aria-labelledby="section-mirror">
         <h2 id="section-mirror">Sens de caisse</h2>
         <div class="option-btns" role="group" aria-labelledby="section-mirror">
-          <button class="opt-btn active" data-mirror="right" aria-pressed="true">Gaucher</button>
-          <button class="opt-btn" data-mirror="left" aria-pressed="false">Droitier</button>
+          <button
+            class="opt-btn active"
+            data-mirror="right"
+            aria-pressed="true">
+            Gaucher
+          </button>
+          <button class="opt-btn" data-mirror="left" aria-pressed="false">
+            Droitier
+          </button>
         </div>
       </section>
 
       <section class="info-section" aria-labelledby="section-belt">
         <h2 id="section-belt">Tapis</h2>
         <div class="option-btns" role="group" aria-labelledby="section-belt">
-          <button class="opt-btn active" data-belt="L" aria-pressed="true">1700mm</button>
-          <button class="opt-btn" data-belt="M" aria-pressed="false">1400mm</button>
-          <button class="opt-btn" data-belt="S" aria-pressed="false">900mm</button>
+          <button class="opt-btn active" data-belt="L" aria-pressed="true">
+            1700mm
+          </button>
+          <button class="opt-btn" data-belt="M" aria-pressed="false">
+            1400mm
+          </button>
+          <button class="opt-btn" data-belt="S" aria-pressed="false">
+            900mm
+          </button>
         </div>
       </section>
 
       <section class="info-section" aria-labelledby="section-tray">
         <h2 id="section-tray">Module Bac</h2>
         <div class="option-btns" role="group" aria-labelledby="section-tray">
-          <button class="opt-btn active" data-tray="1250_L" aria-pressed="true">1200x1100mm</button>
-          <button class="opt-btn" data-tray="700_L" aria-pressed="false">700x1100mm</button>
-          <button class="opt-btn" data-tray="700_M" aria-pressed="false">700x600mm</button>
+          <button class="opt-btn active" data-tray="1250_L" aria-pressed="true">
+            1200x1100mm
+          </button>
+          <button class="opt-btn" data-tray="700_L" aria-pressed="false">
+            700x1100mm
+          </button>
+          <button class="opt-btn" data-tray="700_M" aria-pressed="false">
+            700x600mm
+          </button>
         </div>
       </section>
 
       <section class="info-section" aria-labelledby="section-color">
         <h2 id="section-color">Couleur de la caisse</h2>
-        <div class="color-swatches" role="group" aria-labelledby="section-color">
+        <div
+          class="color-swatches"
+          role="group"
+          aria-labelledby="section-color">
           <button
             class="swatch active"
             data-color="#5B686D"
@@ -149,8 +177,14 @@
             data-ral="9005"
             aria-label="RAL 9005 — Noir foncé"
             aria-pressed="false"></button>
-          <label class="swatch swatch-custom" aria-label="Couleur personnalisée">
-            <input type="color" id="color-custom" value="#5B686D" aria-label="Choisir une couleur personnalisée" />
+          <label
+            class="swatch swatch-custom"
+            aria-label="Couleur personnalisée">
+            <input
+              type="color"
+              id="color-custom"
+              value="#5B686D"
+              aria-label="Choisir une couleur personnalisée" />
           </label>
         </div>
         <p class="color-label" aria-live="polite" aria-atomic="true">
@@ -161,7 +195,10 @@
 
       <section class="info-section" aria-labelledby="section-light">
         <h2 id="section-light">Éclairage intérieur</h2>
-        <div class="color-swatches" role="group" aria-labelledby="section-light">
+        <div
+          class="color-swatches"
+          role="group"
+          aria-labelledby="section-light">
           <button
             class="swatch swatch-light active"
             data-color="#E7E7E7"
@@ -187,8 +224,14 @@
             data-color="#B8FFD0"
             aria-label="Vert doux"
             aria-pressed="false"></button>
-          <label class="swatch swatch-custom" aria-label="Couleur personnalisée">
-            <input type="color" id="light-custom" value="#E7E7E7" aria-label="Choisir une couleur d'éclairage personnalisée" />
+          <label
+            class="swatch swatch-custom"
+            aria-label="Couleur personnalisée">
+            <input
+              type="color"
+              id="light-custom"
+              value="#E7E7E7"
+              aria-label="Choisir une couleur d'éclairage personnalisée" />
           </label>
         </div>
       </section>
@@ -260,7 +303,6 @@
           <li>Jupe complète de protection côté passage clientèle</li>
         </ul>
       </section>
-
     </aside>
 
     <footer class="footer">
@@ -283,9 +325,14 @@
       >
     </footer>
 
-    <div id="cookie-banner" role="region" aria-label="Avis sur les cookies" hidden>
+    <div
+      id="cookie-banner"
+      role="region"
+      aria-label="Avis sur les cookies"
+      hidden>
       <p class="cookie-text">
-        Ce site n'utilise que des cookies techniques strictement nécessaires à son fonctionnement. Aucune donnée n'est transmise à des tiers.
+        Ce site n'utilise que des cookies techniques strictement nécessaires à
+        son fonctionnement. Aucune donnée n'est transmise à des tiers.
         <a href="confidentialite.html">En savoir plus</a>
       </p>
       <button id="cookie-accept" type="button">Compris</button>
@@ -298,27 +345,51 @@
       aria-labelledby="popup-title"
       aria-describedby="popup-content"
       hidden>
-      <button id="popup-close" aria-label="Fermer la fenêtre de détails">&#x2715;</button>
+      <button id="popup-close" aria-label="Fermer la fenêtre de détails">
+        &#x2715;
+      </button>
       <p id="popup-label"></p>
       <h3 id="popup-title"></h3>
       <p id="popup-content"></p>
     </div>
 
-    <div id="devis-modal" role="dialog" aria-modal="true" aria-labelledby="devis-title" hidden>
+    <div
+      id="devis-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="devis-title"
+      hidden>
       <div class="devis-backdrop"></div>
       <div class="devis-panel" role="document">
-        <button class="devis-close" id="devis-close" aria-label="Fermer le récapitulatif">&#x2715;</button>
+        <button
+          class="devis-close"
+          id="devis-close"
+          aria-label="Fermer le récapitulatif">
+          &#x2715;
+        </button>
 
         <p class="devis-eyebrow">Caisse de supermarché</p>
-        <h2 id="devis-title" class="devis-title">Récapitulatif de votre configuration</h2>
+        <h2 id="devis-title" class="devis-title">
+          Récapitulatif de votre configuration
+        </h2>
 
-        <dl class="devis-specs" id="devis-specs" aria-label="Options sélectionnées"></dl>
+        <dl
+          class="devis-specs"
+          id="devis-specs"
+          aria-label="Options sélectionnées"></dl>
 
         <div class="devis-note">
-          <p>En cliquant sur <strong>Confirmer ma sélection</strong>, votre client de messagerie s'ouvrira avec un email pré-rempli contenant vos choix.</p>
+          <p>
+            En cliquant sur <strong>Confirmer ma sélection</strong>, votre
+            client de messagerie s'ouvrira avec un email pré-rempli contenant
+            vos choix.
+          </p>
         </div>
 
-        <button id="devis-confirm" class="cta-btn devis-confirm-btn" type="button">
+        <button
+          id="devis-confirm"
+          class="cta-btn devis-confirm-btn"
+          type="button">
           Confirmer ma sélection &rarr;
         </button>
       </div>
