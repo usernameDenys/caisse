@@ -1,6 +1,6 @@
 {
-  "name": "Caisse Standard de supermarché — Configurateur 3D",
-  "short_name": "Caisse Standard",
+  "name": "SommesPro",
+  "short_name": "SommesPro",
   "description": "Configurez votre caisse de supermarché en 3D",
   "start_url": "/",
   "display": "standalone",
