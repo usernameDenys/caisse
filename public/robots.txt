@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mag3d.fr/sitemap.xml
+Sitemap: https://sommespro.fr/sitemap.xml
