@@ -107,6 +107,7 @@
   white-space: nowrap;
   flex-shrink: 0;
   box-shadow: 0 2px 8px rgba(29, 111, 222, 0.35);
+  cursor: pointer;
   transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
 

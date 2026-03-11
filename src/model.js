@@ -22,7 +22,7 @@ export function setTray(name) {
 
 export function loadModel(loaderEl, onLoaded) {
   new GLTFLoader().load(
-    "./assets/Caisse3js.glb",
+    "/assets/Caisse3js.glb",
     (gltf) => {
       state.loadedModel = gltf.scenes[0];
 

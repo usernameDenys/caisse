@@ -1,45 +1,35 @@
 import * as THREE from "three";
 import { camera, renderer, wrap } from "./scene.js";
 import { state } from "./state.js";
+import { t } from "./i18n.js";
 
-const HOTSPOTS = [
+const HOTSPOT_POSITIONS = [
   {
     id: "conveyor",
-    label: "Tapis convoyeur",
-    title: "Bande transporteuse",
-    content:
-      "Bande caoutchouc avec réglage par vis avant. Marche avant ou arrière, possibilité de commande pédale.",
     position: new THREE.Vector3(-0.361, -0.129, 0.398),
     positionLeft: new THREE.Vector3(-0.341, -0.129, 0.254),
   },
   {
     id: "motor",
-    label: "Motorisation",
-    title: "Moteur 220 V EU",
-    content:
-      "Moteur monophasé 220 V normes EU. Boîtier de commande avec fonction lanterneau 2 couleurs.",
     position: new THREE.Vector3(-0.302, -0.635, 0.189),
     positionLeft: new THREE.Vector3(-0.19, -0.438, 0.269),
   },
   {
     id: "bac",
-    label: "Bac arrière",
-    title: "Bac inox",
-    content:
-      "Bac arrière en inox pour nettoyage rapide et évacuation rapide des articles.",
     position: new THREE.Vector3(-0.446, -0.138, -0.975),
     positionLeft: new THREE.Vector3(0.865, -0.129, 0.33),
   },
   {
     id: "protection",
-    label: "Protection caissier",
-    title: "Écran de protection",
-    content:
-      "Protection du personnel en plexiglas transparent. Fixation rigide sur la base de la caisse pour une stabilité optimale.",
     position: new THREE.Vector3(-0.648, 0.617, -0.223),
     positionLeft: new THREE.Vector3(0.236, 0.612, 0.648),
   },
 ];
+
+const HOTSPOTS = t.hotspots.map((hs, i) => ({
+  ...hs,
+  ...HOTSPOT_POSITIONS[i],
+}));
 
 const popup = document.getElementById("popup");
 const popupLabel = document.getElementById("popup-label");
