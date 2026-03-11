@@ -1,3 +1,5 @@
+import { t } from "./i18n.js";
+
 const devisModal = document.getElementById("devis-modal");
 const devisSpecs = document.getElementById("devis-specs");
 const devisBtn = document.getElementById("devis-btn");
@@ -11,21 +13,23 @@ function getSelectionSummary() {
   const colorSwatch = document.querySelector(".swatch:not(.swatch-light).active");
   const lightSwatch = document.querySelector(".swatch-light.active");
 
+  const l = t.devis.labels;
+
   const colorLabel = colorSwatch
     ? colorSwatch.getAttribute("aria-label")
-    : `Personnalisé — ${document.getElementById("color-custom").value}`;
+    : `${l.custom} — ${document.getElementById("color-custom").value}`;
 
   const lightLabel = lightSwatch
     ? lightSwatch.getAttribute("aria-label")
-    : `Personnalisé — ${document.getElementById("light-custom").value}`;
+    : `${l.custom} — ${document.getElementById("light-custom").value}`;
 
   return [
-    { label: "Produit", value: "Caisse Standard" },
-    { label: "Sens de caisse", value: mirror?.textContent.trim() ?? "—" },
-    { label: "Tapis", value: belt?.textContent.trim() ?? "—" },
-    { label: "Module Bac", value: tray?.textContent.trim() ?? "—" },
-    { label: "Couleur", value: colorLabel },
-    { label: "Éclairage intérieur", value: lightLabel },
+    { label: l.product, value: l.productValue },
+    { label: l.mirror, value: mirror?.textContent.trim() ?? "—" },
+    { label: l.belt, value: belt?.textContent.trim() ?? "—" },
+    { label: l.tray, value: tray?.textContent.trim() ?? "—" },
+    { label: l.color, value: colorLabel },
+    { label: l.light, value: lightLabel },
   ];
 }
 
@@ -53,16 +57,17 @@ document.addEventListener("keydown", (e) => {
 
 devisConfirm.addEventListener("click", () => {
   const specs = getSelectionSummary();
+  const e = t.devis.email;
   const bodyLines = [
-    "Bonjour,",
+    e.greeting,
     "",
-    "Je souhaite recevoir un devis pour la configuration suivante :",
+    e.intro,
     "",
     ...specs.map((s) => `${s.label} : ${s.value}`),
     "",
-    "Cordialement,",
+    e.closing,
   ];
-  const subject = encodeURIComponent("Demande de devis — Caisse Standard");
+  const subject = encodeURIComponent(e.subject);
   const body = encodeURIComponent(bodyLines.join("\n"));
   window.location.href = `mailto:denysgolenko@gmail.com?subject=${subject}&body=${body}`;
 });

@@ -39,7 +39,7 @@ const pmrem = new THREE.PMREMGenerator(renderer);
 pmrem.compileEquirectangularShader();
 
 new HDRLoader().load(
-  "./assets/studio.hdr",
+  "/assets/studio.hdr",
   (hdr) => {
     scene.environment = pmrem.fromEquirectangular(hdr).texture;
     hdr.dispose();

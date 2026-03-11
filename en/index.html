@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -8,13 +8,13 @@
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Caisse Standard de supermarché — SommesPro</title>
+    <title>Standard Supermarket Checkout — SommesPro</title>
     <meta
       name="description"
-      content="Configurez votre caisse de supermarché Standard en 3D : sens de caisse, tapis 900 à 1700 mm, module bac, couleur RAL et éclairage intérieur. Structure tôle, peinture époxy, moteur 220V. Demandez un devis." />
+      content="Configure your Standard supermarket checkout in 3D: orientation, belt 900 to 1700 mm, tray module, RAL colour and interior lighting. Steel structure, epoxy paint, 220V motor. Request a quote." />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://sommespro.fr/" />
+    <link rel="canonical" href="https://sommespro.fr/en/" />
 
     <!-- hreflang -->
     <link rel="alternate" hreflang="fr" href="https://sommespro.fr/" />
@@ -23,15 +23,15 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="fr_FR" />
-    <meta property="og:url" content="https://sommespro.fr/" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:url" content="https://sommespro.fr/en/" />
     <meta property="og:site_name" content="SommesPro" />
     <meta
       property="og:title"
-      content="Caisse Standard de supermarché — Configurateur 3D" />
+      content="Standard Supermarket Checkout — 3D Configurator" />
     <meta
       property="og:description"
-      content="Configurez votre caisse de supermarché en 3D : tapis, couleur RAL, module bac, éclairage. Demandez un devis en ligne." />
+      content="Configure your supermarket checkout in 3D: belt, RAL colour, tray module, lighting. Request a quote online." />
     <meta property="og:image" content="https://sommespro.fr/og-image.webp" />
 
     <!-- JSON-LD -->
@@ -39,8 +39,8 @@
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Caisse Standard de supermarché — Configurateur 3D",
-        "description": "Caisse de supermarché configurable : structure tôle dégraissée, laminage à froid, peinture époxy RAL, tapis transporteur 900–1700 mm, moteur 220V monophasé, châssis mécanosoudé.",
+        "name": "Standard Supermarket Checkout — 3D Configurator",
+        "description": "Configurable supermarket checkout: degreased sheet steel structure, cold rolling, RAL epoxy paint, conveyor belt 900–1700 mm, single-phase 220V EU motor, mechanically welded frame.",
         "image": "https://sommespro.fr/og-image.webp",
         "brand": { "@type": "Brand", "name": "SommesPro" },
         "provider": {
@@ -48,7 +48,7 @@
           "name": "Denys Holenko",
           "email": "denysgolenko@gmail.com"
         },
-        "url": "https://sommespro.fr/"
+        "url": "https://sommespro.fr/en/"
       }
     </script>
 
@@ -59,23 +59,23 @@
       <div
         id="canvas-wrap"
         role="region"
-        aria-label="Visualiseur 3D interactif"
+        aria-label="Interactive 3D viewer"
         aria-describedby="hint">
         <div class="ui">
-          <div id="hint" role="note" aria-label="Conseils de navigation">
+          <div id="hint" role="note" aria-label="Navigation tips">
             <div class="hint-row">
               <span class="hint-icon" aria-hidden="true">⟳</span>
-              <span>Glisser pour faire pivoter</span>
+              <span>Drag to rotate</span>
             </div>
             <div class="hint-row">
               <span class="hint-icon" aria-hidden="true">⊕</span>
-              <span>Molette / pincement pour zoomer</span>
+              <span>Scroll / pinch to zoom</span>
             </div>
             <div class="hint-row">
               <span class="hint-icon hint-icon--i" aria-hidden="true">i</span>
               <span
-                >Points <strong class="hint-strong--i">i</strong> — détails du
-                composant</span
+                ><strong class="hint-strong--i">i</strong> points — component
+                details</span
               >
             </div>
           </div>
@@ -84,48 +84,48 @@
           id="loader"
           role="status"
           aria-live="polite"
-          aria-label="Chargement du modèle 3D">
+          aria-label="Loading 3D model">
           <div class="loader-spinner" aria-hidden="true"></div>
         </div>
       </div>
     </main>
 
-    <aside class="info-panel" aria-label="Panneau de configuration">
+    <aside class="info-panel" aria-label="Configuration panel">
       <div class="panel-brand">
         <h1 class="panel-brand-name">sommespro</h1>
         <nav class="lang-switcher" aria-label="Language">
-          <span class="lang-current" aria-current="true">FR</span>
+          <a class="lang-link" href="/">FR</a>
           <span class="lang-sep" aria-hidden="true">/</span>
-          <a class="lang-link" href="/en/">EN</a>
+          <span class="lang-current" aria-current="true">EN</span>
         </nav>
       </div>
       <div class="panel-header">
         <div class="panel-header-text">
-          <p class="panel-subtitle">Caisse de supermarché</p>
-          <h2 class="panel-title">Caisse Standard</h2>
+          <p class="panel-subtitle">Supermarket checkout</p>
+          <h2 class="panel-title">Standard Checkout</h2>
         </div>
         <button id="devis-btn" class="cta-btn" type="button">
-          Demander un devis
+          Request a quote
         </button>
       </div>
 
       <section class="info-section" aria-labelledby="section-mirror">
-        <h2 id="section-mirror">Sens de caisse</h2>
+        <h2 id="section-mirror">Checkout orientation</h2>
         <div class="option-btns" role="group" aria-labelledby="section-mirror">
           <button
             class="opt-btn active"
             data-mirror="right"
             aria-pressed="true">
-            Gaucher
+            Left-handed
           </button>
           <button class="opt-btn" data-mirror="left" aria-pressed="false">
-            Droitier
+            Right-handed
           </button>
         </div>
       </section>
 
       <section class="info-section" aria-labelledby="section-belt">
-        <h2 id="section-belt">Tapis</h2>
+        <h2 id="section-belt">Conveyor belt</h2>
         <div class="option-btns" role="group" aria-labelledby="section-belt">
           <button class="opt-btn active" data-belt="L" aria-pressed="true">
             1700mm
@@ -140,7 +140,7 @@
       </section>
 
       <section class="info-section" aria-labelledby="section-tray">
-        <h2 id="section-tray">Module Bac</h2>
+        <h2 id="section-tray">Tray module</h2>
         <div class="option-btns" role="group" aria-labelledby="section-tray">
           <button class="opt-btn active" data-tray="1250_L" aria-pressed="true">
             1200x1100mm
@@ -155,7 +155,7 @@
       </section>
 
       <section class="info-section" aria-labelledby="section-color">
-        <h2 id="section-color">Couleur de la caisse</h2>
+        <h2 id="section-color">Checkout colour</h2>
         <div
           class="color-swatches"
           role="group"
@@ -164,50 +164,50 @@
             class="swatch active"
             data-color="#5B686D"
             data-ral="7016"
-            aria-label="RAL 7016 — Gris anthracite"
+            aria-label="RAL 7016 — Anthracite grey"
             aria-pressed="true"></button>
           <button
             class="swatch"
             data-color="#F1F0EB"
             data-ral="9016"
-            aria-label="RAL 9016 — Blanc signalisation"
+            aria-label="RAL 9016 — Traffic white"
             aria-pressed="false"></button>
           <button
             class="swatch"
             data-color="#1C3F6E"
             data-ral="5010"
-            aria-label="RAL 5010 — Bleu gentiane"
+            aria-label="RAL 5010 — Gentian blue"
             aria-pressed="false"></button>
           <button
             class="swatch"
             data-color="#CC0605"
             data-ral="3020"
-            aria-label="RAL 3020 — Rouge signalisation"
+            aria-label="RAL 3020 — Traffic red"
             aria-pressed="false"></button>
           <button
             class="swatch"
             data-color="#0A0A0A"
             data-ral="9005"
-            aria-label="RAL 9005 — Noir foncé"
+            aria-label="RAL 9005 — Jet black"
             aria-pressed="false"></button>
           <label
             class="swatch swatch-custom"
-            aria-label="Couleur personnalisée">
+            aria-label="Custom colour">
             <input
               type="color"
               id="color-custom"
               value="#5B686D"
-              aria-label="Choisir une couleur personnalisée" />
+              aria-label="Choose a custom colour" />
           </label>
         </div>
         <p class="color-label" aria-live="polite" aria-atomic="true">
           RAL <span id="color-ral">7016</span> —
-          <span id="color-name">Gris anthracite</span>
+          <span id="color-name">Anthracite grey</span>
         </p>
       </section>
 
       <section class="info-section" aria-labelledby="section-light">
-        <h2 id="section-light">Éclairage intérieur</h2>
+        <h2 id="section-light">Interior lighting</h2>
         <div
           class="color-swatches"
           role="group"
@@ -215,36 +215,36 @@
           <button
             class="swatch swatch-light active"
             data-color="#E7E7E7"
-            aria-label="Blanc neutre"
+            aria-label="Neutral white"
             aria-pressed="true"></button>
           <button
             class="swatch swatch-light"
             data-color="#FFE4B0"
-            aria-label="Blanc chaud"
+            aria-label="Warm white"
             aria-pressed="false"></button>
           <button
             class="swatch swatch-light"
             data-color="#B8D4FF"
-            aria-label="Blanc froid"
+            aria-label="Cool white"
             aria-pressed="false"></button>
           <button
             class="swatch swatch-light"
             data-color="#FFB347"
-            aria-label="Ambre"
+            aria-label="Amber"
             aria-pressed="false"></button>
           <button
             class="swatch swatch-light"
             data-color="#B8FFD0"
-            aria-label="Vert doux"
+            aria-label="Soft green"
             aria-pressed="false"></button>
           <label
             class="swatch swatch-custom"
-            aria-label="Couleur personnalisée">
+            aria-label="Custom colour">
             <input
               type="color"
               id="light-custom"
               value="#E7E7E7"
-              aria-label="Choisir une couleur d'éclairage personnalisée" />
+              aria-label="Choose a custom lighting colour" />
           </label>
         </div>
       </section>
@@ -255,7 +255,7 @@
           class="accordion-btn"
           aria-expanded="false"
           aria-controls="normes-body">
-          Conformité aux normes
+          Standards compliance
           <span class="accordion-icon" aria-hidden="true">+</span>
         </button>
         <div
@@ -265,55 +265,55 @@
           aria-labelledby="normes-btn"
           hidden>
           <ul class="norm-links">
-            <li>NF X35-701 — Prévention des troubles musculo-squelettiques</li>
+            <li>NF X35-701 — Prevention of musculoskeletal disorders</li>
             <li>
-              NF EN ISO 14738 — Prescriptions anthropométriques relatives à la
-              conception des postes de travail sur les machines
+              NF EN ISO 14738 — Anthropometric requirements for the design of
+              workstations on machinery
             </li>
             <li>
-              NF EN ISO 9241-400 — Ergonomie de l'interaction homme-système
+              NF EN ISO 9241-400 — Ergonomics of human-system interaction
             </li>
-            <li>NF EN 12464-1 — Lumière et éclairage des lieux de travail</li>
+            <li>NF EN 12464-1 — Light and lighting of workplaces</li>
             <li>
-              Art. R.111-19-2 CCH — Accessibilité aux Personnes à Mobilité
-              Réduite
+              Art. R.111-19-2 CCH — Accessibility for persons with reduced
+              mobility
             </li>
           </ul>
         </div>
       </section>
 
       <section class="info-section" aria-labelledby="section-tech">
-        <h2 id="section-tech">Caractéristiques techniques</h2>
+        <h2 id="section-tech">Technical specifications</h2>
         <ul>
-          <li>Structure tôle dégraissé</li>
-          <li>Laminage à froid</li>
-          <li>Peinture epoxy suivant nuancier RAL</li>
-          <li>Bandeau de protection aluminium inclus</li>
-          <li>Bumper matière plastique</li>
+          <li>Degreased sheet steel structure</li>
+          <li>Cold rolling</li>
+          <li>Epoxy paint in RAL colours</li>
+          <li>Aluminium protection strip included</li>
+          <li>Plastic bumper</li>
           <li>
-            Moteur 220V normes EU monophasé avec bande caoutchouc transporteuse
+            Single-phase 220V EU standard motor with rubber conveyor belt
           </li>
-          <li>Réglage par vis avant</li>
-          <li>Châssis construction mécanosoudé avec mise à niveau par vis</li>
+          <li>Front screw adjustment</li>
+          <li>Mechanically welded frame with screw levelling</li>
           <li>
-            Arrière découpé grand débattement pour déchargement du bac rapide et
-            facilité d'accès PMR
+            Wide-clearance rear cut-out for quick tray unloading and PRM
+            accessibility
           </li>
         </ul>
       </section>
 
       <section class="info-section" aria-labelledby="section-fonct">
-        <h2 id="section-fonct">Fonctionnement</h2>
+        <h2 id="section-fonct">Operation</h2>
         <ul>
           <li>
-            Boîtier de commande avec fonction lanterneau 2 couleurs, tapis
-            marche avant ou arrière, possibilité de fonctionnement pédale
+            Control unit with 2-colour lantern function, forward/reverse belt,
+            optional pedal operation
           </li>
           <li>
-            Bac arrière en inox pour nettoyage rapide et évacuation rapide des
-            articles
+            Stainless steel rear tray for quick cleaning and rapid item
+            evacuation
           </li>
-          <li>Jupe complète de protection côté passage clientèle</li>
+          <li>Full protective skirt on the customer-side</li>
         </ul>
       </section>
     </aside>
@@ -321,10 +321,10 @@
     <footer class="footer">
       <span>© 2026</span>
       <span class="footer-sep" aria-hidden="true">·</span>
-      <nav class="footer-legal" aria-label="Pages légales">
-        <a href="mentions-legales.html">Mentions légales</a>
+      <nav class="footer-legal" aria-label="Legal pages">
+        <a href="/en/legal-notice.html">Legal notice</a>
         <span class="footer-sep" aria-hidden="true">·</span>
-        <a href="confidentialite.html">Confidentialité</a>
+        <a href="/en/privacy-policy.html">Privacy</a>
       </nav>
       <span class="footer-sep" aria-hidden="true">·</span>
       <span
@@ -333,7 +333,7 @@
           href="https://denys-holenko.com"
           target="_blank"
           rel="noopener noreferrer"
-          >Denys Holenko<span class="sr-only"> (nouvelle fenêtre)</span></a
+          >Denys Holenko<span class="sr-only"> (new window)</span></a
         ></span
       >
     </footer>
@@ -341,14 +341,14 @@
     <div
       id="cookie-banner"
       role="region"
-      aria-label="Avis sur les cookies"
+      aria-label="Cookie notice"
       hidden>
       <p class="cookie-text">
-        Ce site n'utilise que des cookies techniques strictement nécessaires à
-        son fonctionnement. Aucune donnée n'est transmise à des tiers.
-        <a href="confidentialite.html">En savoir plus</a>
+        This site only uses strictly necessary technical cookies. No data is
+        shared with third parties.
+        <a href="/en/privacy-policy.html">Learn more</a>
       </p>
-      <button id="cookie-accept" type="button">Compris</button>
+      <button id="cookie-accept" type="button">Got it</button>
     </div>
 
     <div
@@ -358,7 +358,7 @@
       aria-labelledby="popup-title"
       aria-describedby="popup-content"
       hidden>
-      <button id="popup-close" aria-label="Fermer la fenêtre de détails">
+      <button id="popup-close" aria-label="Close details window">
         &#x2715;
       </button>
       <p id="popup-label"></p>
@@ -377,25 +377,24 @@
         <button
           class="devis-close"
           id="devis-close"
-          aria-label="Fermer le récapitulatif">
+          aria-label="Close summary">
           &#x2715;
         </button>
 
-        <p class="devis-eyebrow">Caisse de supermarché</p>
+        <p class="devis-eyebrow">Supermarket checkout</p>
         <h2 id="devis-title" class="devis-title">
-          Récapitulatif de votre configuration
+          Your configuration summary
         </h2>
 
         <dl
           class="devis-specs"
           id="devis-specs"
-          aria-label="Options sélectionnées"></dl>
+          aria-label="Selected options"></dl>
 
         <div class="devis-note">
           <p>
-            En cliquant sur <strong>Confirmer ma sélection</strong>, votre
-            client de messagerie s'ouvrira avec un email pré-rempli contenant
-            vos choix.
+            By clicking <strong>Confirm my selection</strong>, your email
+            client will open with a pre-filled message containing your choices.
           </p>
         </div>
 
@@ -403,7 +402,7 @@
           id="devis-confirm"
           class="cta-btn devis-confirm-btn"
           type="button">
-          Confirmer ma sélection &rarr;
+          Confirm my selection &rarr;
         </button>
       </div>
     </div>

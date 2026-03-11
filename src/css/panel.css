@@ -16,6 +16,9 @@
 
 .panel-brand {
   padding: 24px 28px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .panel-brand-name {
@@ -25,6 +28,33 @@
   text-transform: uppercase;
   color: #1a1a1a;
   margin: 0;
+}
+
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.lang-current {
+  color: #1a1a1a;
+}
+
+.lang-sep {
+  color: #ccc;
+}
+
+.lang-link {
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.lang-link:hover {
+  color: #1a1a1a;
 }
 
 .panel-header {
