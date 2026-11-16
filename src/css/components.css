@@ -210,3 +210,31 @@
   color: #1a1a1a;
   border-color: #1a1a1a;
 }
+
+/* Secondary (ghost) buttons */
+.ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.ghost-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.3);
+  color: #1a1a1a;
+}
+
+.ghost-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}

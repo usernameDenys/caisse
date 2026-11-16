@@ -1,0 +1,179 @@
+{
+  "lang": "fr",
+  "label": "FR",
+  "url": "https://sommespro.fr/",
+  "meta": {
+    "title": "Caisse Standard de supermarché — SommesPro",
+    "description": "Configurez votre caisse de supermarché Standard en 3D : sens de caisse, tapis 900 à 1700 mm, module bac, couleur RAL et éclairage intérieur. Structure tôle, peinture époxy, moteur 220V. Demandez un devis.",
+    "ogLocale": "fr_FR",
+    "ogTitle": "Caisse Standard de supermarché — Configurateur 3D",
+    "ogDescription": "Configurez votre caisse de supermarché en 3D : tapis, couleur RAL, module bac, éclairage. Demandez un devis en ligne.",
+    "ldName": "Caisse Standard de supermarché — Configurateur 3D",
+    "ldDescription": "Caisse de supermarché configurable : structure tôle dégraissée, laminage à froid, peinture époxy RAL, tapis transporteur 900–1700 mm, moteur 220V monophasé, châssis mécanosoudé."
+  },
+  "links": {
+    "legal": "/mentions-legales.html",
+    "legalLabel": "Mentions légales",
+    "privacy": "/confidentialite.html",
+    "privacyLabel": "Confidentialité",
+    "legalNav": "Pages légales",
+    "newWindow": "(nouvelle fenêtre)"
+  },
+  "viewer": {
+    "label": "Visualiseur 3D interactif",
+    "hintLabel": "Conseils de navigation",
+    "rotate": "Glisser pour faire pivoter",
+    "zoom": "Molette / pincement pour zoomer",
+    "hotspotsHtml": "Points <strong class=\"hint-strong--i\">i</strong> — détails du composant",
+    "loading": "Chargement du modèle 3D"
+  },
+  "panel": {
+    "label": "Panneau de configuration",
+    "subtitle": "Caisse de supermarché",
+    "title": "Caisse Standard",
+    "cta": "Demander un devis",
+    "share": "Copier le lien",
+    "shareCopied": "Lien copié",
+    "pdf": "Télécharger PDF",
+    "pdfBusy": "Génération…"
+  },
+  "options": {
+    "mirror": "Sens de caisse",
+    "mirrorRight": "Gaucher",
+    "mirrorLeft": "Droitier",
+    "belt": "Tapis",
+    "tray": "Module Bac",
+    "color": "Couleur de la caisse",
+    "colorCustom": "Couleur personnalisée",
+    "colorCustomPick": "Choisir une couleur personnalisée",
+    "light": "Éclairage intérieur",
+    "lightCustomPick": "Choisir une couleur d'éclairage personnalisée"
+  },
+  "ral": {
+    "7016": "Gris anthracite",
+    "9016": "Blanc signalisation",
+    "5010": "Bleu gentiane",
+    "3020": "Rouge signalisation",
+    "9005": "Noir foncé"
+  },
+  "lights": {
+    "E7E7E7": "Blanc neutre",
+    "FFE4B0": "Blanc chaud",
+    "B8D4FF": "Blanc froid",
+    "FFB347": "Ambre",
+    "B8FFD0": "Vert doux"
+  },
+  "norms": {
+    "title": "Conformité aux normes",
+    "items": [
+      "NF X35-701 — Prévention des troubles musculo-squelettiques",
+      "NF EN ISO 14738 — Prescriptions anthropométriques relatives à la conception des postes de travail sur les machines",
+      "NF EN ISO 9241-400 — Ergonomie de l'interaction homme-système",
+      "NF EN 12464-1 — Lumière et éclairage des lieux de travail",
+      "Art. R.111-19-2 CCH — Accessibilité aux Personnes à Mobilité Réduite"
+    ]
+  },
+  "tech": {
+    "title": "Caractéristiques techniques",
+    "items": [
+      "Structure tôle dégraissé",
+      "Laminage à froid",
+      "Peinture epoxy suivant nuancier RAL",
+      "Bandeau de protection aluminium inclus",
+      "Bumper matière plastique",
+      "Moteur 220V normes EU monophasé avec bande caoutchouc transporteuse",
+      "Réglage par vis avant",
+      "Châssis construction mécanosoudé avec mise à niveau par vis",
+      "Arrière découpé grand débattement pour déchargement du bac rapide et facilité d'accès PMR"
+    ]
+  },
+  "operation": {
+    "title": "Fonctionnement",
+    "items": [
+      "Boîtier de commande avec fonction lanterneau 2 couleurs, tapis marche avant ou arrière, possibilité de fonctionnement pédale",
+      "Bac arrière en inox pour nettoyage rapide et évacuation rapide des articles",
+      "Jupe complète de protection côté passage clientèle"
+    ]
+  },
+  "cookie": {
+    "label": "Avis sur les cookies",
+    "text": "Ce site n'utilise que des cookies techniques strictement nécessaires à son fonctionnement. Aucune donnée n'est transmise à des tiers.",
+    "more": "En savoir plus",
+    "accept": "Compris"
+  },
+  "popup": {
+    "close": "Fermer la fenêtre de détails"
+  },
+  "hotspots": [
+    {
+      "id": "conveyor",
+      "label": "Tapis convoyeur",
+      "title": "Bande transporteuse",
+      "content": "Bande caoutchouc avec réglage par vis avant. Marche avant ou arrière, possibilité de commande pédale."
+    },
+    {
+      "id": "motor",
+      "label": "Motorisation",
+      "title": "Moteur 220 V EU",
+      "content": "Moteur monophasé 220 V normes EU. Boîtier de commande avec fonction lanterneau 2 couleurs."
+    },
+    {
+      "id": "bac",
+      "label": "Bac arrière",
+      "title": "Bac inox",
+      "content": "Bac arrière en inox pour nettoyage rapide et évacuation rapide des articles."
+    },
+    {
+      "id": "protection",
+      "label": "Protection caissier",
+      "title": "Écran de protection",
+      "content": "Protection du personnel en plexiglas transparent. Fixation rigide sur la base de la caisse pour une stabilité optimale."
+    }
+  ],
+  "devis": {
+    "close": "Fermer le récapitulatif",
+    "eyebrow": "Caisse de supermarché",
+    "title": "Récapitulatif de votre configuration",
+    "specsLabel": "Options sélectionnées",
+    "labels": {
+      "product": "Produit",
+      "productValue": "Caisse Standard",
+      "mirror": "Sens de caisse",
+      "belt": "Tapis",
+      "tray": "Module Bac",
+      "color": "Couleur",
+      "light": "Éclairage intérieur",
+      "custom": "Personnalisé",
+      "link": "Lien de la configuration"
+    },
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "company": "Société",
+      "phone": "Téléphone",
+      "message": "Message",
+      "messagePlaceholder": "Quantité, délais, adresse de livraison…",
+      "required": "obligatoire",
+      "note": "Le lien vers votre configuration 3D sera joint à la demande.",
+      "privacyHtml": "Vos données servent uniquement à traiter votre demande. <a href=\"/confidentialite.html\">Politique de confidentialité</a>",
+      "submit": "Envoyer la demande",
+      "sending": "Envoi…",
+      "success": "Merci ! Votre demande a bien été envoyée. Nous vous répondons rapidement.",
+      "error": "L'envoi a échoué. Réessayez ou écrivez-nous directement :",
+      "invalid": "Merci de renseigner votre nom et une adresse email valide."
+    },
+    "email": {
+      "subject": "Demande de devis — Caisse Standard",
+      "greeting": "Bonjour,",
+      "intro": "Je souhaite recevoir un devis pour la configuration suivante :",
+      "closing": "Cordialement,"
+    }
+  },
+  "pdf": {
+    "title": "Spécification de configuration",
+    "date": "Date",
+    "configuration": "Configuration",
+    "filename": "caisse-standard-configuration.pdf",
+    "footer": "Document généré depuis le configurateur 3D — non contractuel."
+  }
+}
