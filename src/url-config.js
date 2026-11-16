@@ -7,7 +7,7 @@ const SIDE = { right: "right", left: "left" };
 const BELT = { 1700: "L", 1400: "M", 900: "S" };
 const TRAY = { "1200x1100": "1250_L", "700x1100": "700_L", "700x600": "700_M" };
 export const RAL = {
-  7016: "#5B686D",
+  7016: "#383E42",
   9016: "#F1F0EB",
   5010: "#1C3F6E",
   3020: "#CC0605",

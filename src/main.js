@@ -4,16 +4,7 @@ import { initHotspots, updateHotspotPositions, hidePopup } from "./hotspots.js";
 import { onModelLoaded } from "./configurator.js";
 import "./devis.js";
 import "./actions.js";
-
-//Accordion
-document.querySelectorAll(".accordion-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const expanded = btn.getAttribute("aria-expanded") === "true";
-    const body = document.getElementById(btn.getAttribute("aria-controls"));
-    btn.setAttribute("aria-expanded", String(!expanded));
-    body.hidden = expanded;
-  });
-});
+import "./ui.js";
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") hidePopup();

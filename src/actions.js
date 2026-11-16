@@ -9,7 +9,7 @@ const pdfBtn = document.getElementById("pdf-btn");
 const status = document.getElementById("share-status");
 
 function flashLabel(btn, text, ms = 1800) {
-  const label = btn.querySelector(".ghost-btn-label");
+  const label = btn.querySelector(".btn-label");
   const original = label.dataset.original ?? label.textContent;
   label.dataset.original = original;
   label.textContent = text;
@@ -41,7 +41,7 @@ shareBtn.addEventListener("click", async () => {
 pdfBtn.addEventListener("click", async () => {
   if (!state.loadedModel || pdfBtn.disabled) return;
   pdfBtn.disabled = true;
-  const label = pdfBtn.querySelector(".ghost-btn-label");
+  const label = pdfBtn.querySelector(".btn-label");
   const original = label.textContent;
   label.textContent = t.panel.pdfBusy;
   try {

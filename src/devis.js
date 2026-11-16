@@ -2,6 +2,8 @@ import { t } from "./i18n.js";
 import { state } from "./state.js";
 import { getSelectionSummary } from "./configurator.js";
 import { shareUrl } from "./url-config.js";
+import { captureImage } from "./scene.js";
+import { CAMERA_DIRECTIONS } from "./configurator.js";
 
 // Web3Forms (https://web3forms.com) delivers the form to our inbox — no backend.
 // The access key is public by design. Empty → fall back to a pre-filled mailto:.
@@ -18,19 +20,39 @@ const closeBtn = document.getElementById("devis-close");
 const form = document.getElementById("devis-form");
 const submitBtn = document.getElementById("devis-confirm");
 const statusEl = document.getElementById("devis-status");
+const previewImg = document.getElementById("devis-preview");
+const submitLabel = submitBtn.querySelector(".btn-label");
 const f = t.devis.form;
 
 // ── Modal ────────────────────────────────────────────────────────────────
 function open() {
   specsEl.replaceChildren(
-    ...getSelectionSummary().flatMap((s) => {
-      const dt = document.createElement("dt");
-      dt.textContent = s.label;
-      const dd = document.createElement("dd");
-      dd.textContent = s.value;
-      return [dt, dd];
-    })
+    ...getSelectionSummary()
+      .filter((s) => s.key !== "product") // shown as the heading above
+      .flatMap((s) => {
+        const dt = document.createElement("dt");
+        dt.textContent = s.label;
+        const dd = document.createElement("dd");
+        if (s.swatch) {
+          const dot = document.createElement("span");
+          dot.className = "chip-dot";
+          dot.setAttribute("aria-hidden", "true");
+          dot.style.background = s.display ?? s.swatch;
+          dd.append(dot);
+        }
+        dd.append(s.value);
+        return [dt, dd];
+      }),
   );
+  if (state.loadedModel) {
+    previewImg.src = captureImage(
+      state.loadedModel,
+      CAMERA_DIRECTIONS[state.config.mirror],
+      760,
+      360,
+    );
+    previewImg.hidden = false;
+  }
   setStatus("");
   form.hidden = false;
   modal.hidden = false;
@@ -45,6 +67,7 @@ function close() {
 openBtn.addEventListener("click", open);
 closeBtn.addEventListener("click", close);
 modal.querySelector(".devis-backdrop").addEventListener("click", close);
+document.getElementById("devis-edit").addEventListener("click", close);
 
 // Escape closes; Tab stays inside the dialog
 document.addEventListener("keydown", (e) => {
@@ -52,7 +75,9 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") close();
   if (e.key !== "Tab") return;
   const focusable = [
-    ...panel.querySelectorAll("button, a[href], input:not([tabindex='-1']), textarea"),
+    ...panel.querySelectorAll(
+      "button, a[href], input:not([tabindex='-1']), textarea",
+    ),
   ].filter((el) => !el.disabled && el.offsetParent !== null);
   const first = focusable[0];
   const last = focusable.at(-1);
@@ -89,14 +114,14 @@ function mailtoHref(data) {
     [data.name, data.company, data.phone].filter(Boolean).join("\n"),
   ];
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(e.subject)}&body=${encodeURIComponent(
-    lines.join("\n")
+    lines.join("\n"),
   )}`;
 }
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const data = Object.fromEntries(
-    [...new FormData(form)].map(([k, v]) => [k, String(v).trim()])
+    [...new FormData(form)].map(([k, v]) => [k, String(v).trim()]),
   );
 
   if (!data.name || !form.elements.email.checkValidity() || !data.email) {
@@ -111,7 +136,7 @@ form.addEventListener("submit", async (e) => {
   }
 
   submitBtn.disabled = true;
-  submitBtn.textContent = f.sending;
+  submitLabel.textContent = f.sending;
   setStatus("");
 
   try {
@@ -127,18 +152,24 @@ form.addEventListener("submit", async (e) => {
       email: data.email, // used as Reply-To
       [fl.company]: data.company,
       [fl.phone]: data.phone,
-      ...Object.fromEntries(getSelectionSummary().map((s) => [s.label, s.value])),
+      ...Object.fromEntries(
+        getSelectionSummary().map((s) => [s.label, s.value]),
+      ),
       [l.link]: shareUrl(state.config),
       [fl.message]: data.message,
     };
 
     const res = await fetch(ENDPOINT, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
       body: JSON.stringify(payload),
     });
     const result = await res.json().catch(() => ({}));
-    if (!res.ok || !result.success) throw new Error(result.message || `HTTP ${res.status}`);
+    if (!res.ok || !result.success)
+      throw new Error(result.message || `HTTP ${res.status}`);
 
     form.reset();
     form.hidden = true;
@@ -147,9 +178,13 @@ form.addEventListener("submit", async (e) => {
   } catch (err) {
     console.error("Quote request failed:", err);
     const href = mailtoHref(data).replace(/"/g, "%22");
-    setStatus(`${f.error} <a href="${href}">${CONTACT_EMAIL}</a>`, "error", true);
+    setStatus(
+      `${f.error} <a href="${href}">${CONTACT_EMAIL}</a>`,
+      "error",
+      true,
+    );
   } finally {
     submitBtn.disabled = false;
-    submitBtn.innerHTML = `${f.submit} &rarr;`;
+    submitLabel.textContent = f.submit;
   }
 });

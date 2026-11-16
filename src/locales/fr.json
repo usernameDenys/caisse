@@ -17,7 +17,8 @@
     "privacy": "/confidentialite.html",
     "privacyLabel": "Confidentialité",
     "legalNav": "Pages légales",
-    "newWindow": "(nouvelle fenêtre)"
+    "newWindow": "(nouvelle fenêtre)",
+    "home": "/"
   },
   "viewer": {
     "label": "Visualiseur 3D interactif",
@@ -25,7 +26,17 @@
     "rotate": "Glisser pour faire pivoter",
     "zoom": "Molette / pincement pour zoomer",
     "hotspotsHtml": "Points <strong class=\"hint-strong--i\">i</strong> — détails du composant",
-    "loading": "Chargement du modèle 3D"
+    "loading": "Chargement du modèle 3D",
+    "hintHtml": "Glisser pour pivoter · molette pour zoomer · <strong>i</strong> pour les détails",
+    "hintShort": "Glisser pour pivoter",
+    "views": "Angle de vue",
+    "view34": "3/4",
+    "viewFront": "Face",
+    "viewSide": "Profil",
+    "viewBack": "Arrière",
+    "zoomIn": "Zoom avant",
+    "zoomOut": "Zoom arrière",
+    "fullscreen": "Plein écran"
   },
   "panel": {
     "label": "Panneau de configuration",
@@ -47,7 +58,10 @@
     "colorCustom": "Couleur personnalisée",
     "colorCustomPick": "Choisir une couleur personnalisée",
     "light": "Éclairage intérieur",
-    "lightCustomPick": "Choisir une couleur d'éclairage personnalisée"
+    "lightCustomPick": "Choisir une couleur d'éclairage personnalisée",
+    "beltLong": "Longueur du tapis",
+    "trayShort": "Module bac",
+    "otherRal": "Autre RAL"
   },
   "ral": {
     "7016": "Gris anthracite",
@@ -175,5 +189,44 @@
     "configuration": "Configuration",
     "filename": "caisse-standard-configuration.pdf",
     "footer": "Document généré depuis le configurateur 3D — non contractuel."
+  },
+  "header": {
+    "breadcrumb": "Caisses de supermarché",
+    "planner": "Planifier mon magasin",
+    "plannerShort": "Planifier",
+    "pdf": "Fiche PDF",
+    "share": "Partager",
+    "language": "Langue",
+    "breadcrumbLabel": "Fil d'Ariane"
+  },
+  "steps": {
+    "label": "Étapes",
+    "dimensions": "Dimensions",
+    "finish": "Finition",
+    "details": "Détails"
+  },
+  "bar": {
+    "title": "Votre configuration",
+    "chosen": "Options choisies",
+    "price": "Prix",
+    "onQuote": "Sur devis",
+    "priceOnQuote": "Prix sur devis",
+    "optionsCount": "{n} options choisies",
+    "summary": "Voir le récapitulatif",
+    "belt": "Tapis",
+    "tray": "Bac"
+  },
+  "devis2": {
+    "title": "Demander un devis",
+    "lead": "Laissez vos coordonnées : nous vous répondons avec une offre adaptée à cette configuration.",
+    "summary": "Votre configuration",
+    "preview": "Aperçu de la configuration",
+    "edit": "Modifier la configuration",
+    "emailPro": "Email professionnel",
+    "requiredNote": "Champs obligatoires",
+    "close": "Fermer"
+  },
+  "footer": {
+    "brand": "© 2026 SommesPro"
   }
 }
