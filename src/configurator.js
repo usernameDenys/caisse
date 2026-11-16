@@ -1,141 +1,145 @@
 import * as THREE from "three";
-import { camera, ctrls } from "./scene.js";
-import { fitCameraToModel } from "./scene.js";
-import { state } from "./state.js";
+import { camera, ctrls, fitPosition, fitCameraToModel, animateCameraTo, requestRender } from "./scene.js";
+import { state, DEFAULT_CONFIG } from "./state.js";
 import { setBelt, setTray } from "./model.js";
+import { t } from "./i18n.js";
+import { readConfigFromUrl, writeConfigToUrl, ralForHex } from "./url-config.js";
 
-//Helpers
-function setActiveBtn(group, active) {
-  group.forEach((b) => {
-    b.classList.remove("active");
-    b.setAttribute("aria-pressed", "false");
-  });
-  active.classList.add("active");
-  active.setAttribute("aria-pressed", "true");
-}
-
-//Body colour
-const RAL_NAMES = {
-  7016: "Gris anthracite",
-  9016: "Blanc signalisation",
-  5010: "Bleu gentiane",
-  3020: "Rouge signalisation",
-  9005: "Noir foncé",
+/** Default camera direction for each checkout orientation. */
+export const CAMERA_DIRECTIONS = {
+  right: new THREE.Vector3(-3, 1.5, -3),
+  left: new THREE.Vector3(3.844, 1.847, 3.667),
 };
 
-const bodySwatches = [
-  ...document.querySelectorAll(".swatch:not(.swatch-light)[data-color]"),
-];
+// ── DOM ──────────────────────────────────────────────────────────────────
+const mirrorBtns = [...document.querySelectorAll(".opt-btn[data-mirror]")];
+const beltBtns = [...document.querySelectorAll(".opt-btn[data-belt]")];
+const trayBtns = [...document.querySelectorAll(".opt-btn[data-tray]")];
+const bodySwatches = [...document.querySelectorAll(".swatch:not(.swatch-light)[data-color]")];
+const lightSwatches = [...document.querySelectorAll(".swatch-light[data-color]")];
+const colorCustom = document.getElementById("color-custom");
+const lightCustom = document.getElementById("light-custom");
 const colorRalEl = document.getElementById("color-ral");
 const colorNameEl = document.getElementById("color-name");
-const colorCustom = document.getElementById("color-custom");
 
-bodySwatches.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    setActiveBtn(bodySwatches, btn);
-    const { color: hex, ral } = btn.dataset;
-    colorCustom.value = hex;
-    colorRalEl.textContent = ral;
-    colorNameEl.textContent = RAL_NAMES[ral] ?? "";
-    if (state.bodyMaterial) state.bodyMaterial.color.set(hex);
+function setPressed(buttons, isActive) {
+  buttons.forEach((b) => {
+    const on = isActive(b);
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-pressed", String(on));
   });
-});
-
-colorCustom.addEventListener("input", (e) => {
-  bodySwatches.forEach((s) => {
-    s.classList.remove("active");
-    s.setAttribute("aria-pressed", "false");
-  });
-  colorRalEl.textContent = "—";
-  colorNameEl.textContent = "Personnalisé";
-  if (state.bodyMaterial) state.bodyMaterial.color.set(e.target.value);
-});
-
-//Emissive light colour
-const lightSwatches = [
-  ...document.querySelectorAll(".swatch-light[data-color]"),
-];
-const lightCustom = document.getElementById("light-custom");
-
-function applyLightColor(hex) {
-  if (!state.emissiveMaterial) return;
-  state.emissiveMaterial.color.set(hex);
-  state.emissiveMaterial.emissive.set(hex);
 }
 
-lightSwatches.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    setActiveBtn(lightSwatches, btn);
-    lightCustom.value = btn.dataset.color;
-    applyLightColor(btn.dataset.color);
-  });
-});
+const sameHex = (a, b) => a.toUpperCase() === b.toUpperCase();
 
-lightCustom.addEventListener("input", (e) => {
-  lightSwatches.forEach((s) => {
-    s.classList.remove("active");
-    s.setAttribute("aria-pressed", "false");
-  });
-  applyLightColor(e.target.value);
-});
+// ── Public API ───────────────────────────────────────────────────────────
+let urlTimer;
 
-//Mirror
-const mirrorBtns = [...document.querySelectorAll(".opt-btn[data-mirror]")];
+/** Merge `patch` into the configuration and update UI, 3D model and URL. */
+export function setConfig(patch) {
+  const prev = state.config;
+  const next = { ...prev, ...patch };
+  next.color = next.color.toUpperCase();
+  next.light = next.light.toUpperCase();
+  state.config = next;
 
-mirrorBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    setActiveBtn(mirrorBtns, btn);
-    const isLeft = btn.dataset.mirror === "left";
-    state.isMirroredLeft = isLeft;
+  syncUI();
+  applyToModel({ mirrorChanged: prev.mirror !== next.mirror, animate: true });
 
-    if (state.loadedModel) {
-      state.loadedModel.scale.x = isLeft ? -1 : 1;
-      state.loadedModel.rotation.y = isLeft ? Math.PI * 1.5 : 0;
-      state.loadedModel.position.set(0, 0, 0);
-      state.loadedModel.updateMatrixWorld();
+  // Debounced: colour pickers fire many events, and Safari throttles replaceState
+  clearTimeout(urlTimer);
+  urlTimer = setTimeout(() => writeConfigToUrl(state.config), 250);
+}
 
-      const center = new THREE.Box3()
-        .setFromObject(state.loadedModel)
-        .getCenter(new THREE.Vector3());
-      state.loadedModel.position.sub(center);
+/** Called once the GLB is in the scene. */
+export function onModelLoaded() {
+  applyToModel({ mirrorChanged: true, animate: false });
+}
 
-      state.loadedModel.traverse((obj) => {
-        if (obj.isMesh && obj.material) {
-          const mats = Array.isArray(obj.material)
-            ? obj.material
-            : [obj.material];
-          mats.forEach((m) => (m.side = THREE.DoubleSide));
-        }
-      });
+/** Human-readable summary of the current configuration (for quote + PDF). */
+export function getSelectionSummary() {
+  const c = state.config;
+  const l = t.devis.labels;
+  const text = (buttons, attr) =>
+    buttons.find((b) => b.dataset[attr] === c[attr])?.textContent.trim() ?? "—";
+
+  const ral = ralForHex(c.color);
+  const colorLabel = ral ? `RAL ${ral} — ${t.ral[ral]}` : `${l.custom} — ${c.color}`;
+  const lightName = t.lights[c.light.slice(1)];
+  const lightLabel = lightName ?? `${l.custom} — ${c.light}`;
+
+  return [
+    { key: "product", label: l.product, value: l.productValue },
+    { key: "mirror", label: l.mirror, value: text(mirrorBtns, "mirror") },
+    { key: "belt", label: l.belt, value: text(beltBtns, "belt") },
+    { key: "tray", label: l.tray, value: text(trayBtns, "tray") },
+    { key: "color", label: l.color, value: colorLabel, swatch: c.color },
+    { key: "light", label: l.light, value: lightLabel, swatch: c.light },
+  ];
+}
+
+// ── UI ───────────────────────────────────────────────────────────────────
+function syncUI() {
+  const c = state.config;
+  setPressed(mirrorBtns, (b) => b.dataset.mirror === c.mirror);
+  setPressed(beltBtns, (b) => b.dataset.belt === c.belt);
+  setPressed(trayBtns, (b) => b.dataset.tray === c.tray);
+  setPressed(bodySwatches, (b) => sameHex(b.dataset.color, c.color));
+  setPressed(lightSwatches, (b) => sameHex(b.dataset.color, c.light));
+
+  colorCustom.value = c.color.toLowerCase();
+  lightCustom.value = c.light.toLowerCase();
+
+  const ral = ralForHex(c.color);
+  colorRalEl.textContent = ral ?? "—";
+  colorNameEl.textContent = ral ? t.ral[ral] : t.devis.labels.custom;
+}
+
+// ── 3D ───────────────────────────────────────────────────────────────────
+function applyToModel({ mirrorChanged, animate }) {
+  const model = state.loadedModel;
+  if (!model) return;
+  const c = state.config;
+
+  setBelt(c.belt);
+  setTray(c.tray);
+  state.bodyMaterial?.color.set(c.color);
+  if (state.emissiveMaterial) {
+    state.emissiveMaterial.color.set(c.light);
+    state.emissiveMaterial.emissive.set(c.light);
+  }
+
+  if (mirrorChanged) {
+    const isLeft = c.mirror === "left";
+    model.scale.x = isLeft ? -1 : 1;
+    model.rotation.y = isLeft ? Math.PI * 1.5 : 0;
+    model.position.set(0, 0, 0);
+    model.updateMatrixWorld();
+    const center = new THREE.Box3().setFromObject(model).getCenter(new THREE.Vector3());
+    model.position.sub(center);
+
+    const dir = CAMERA_DIRECTIONS[c.mirror];
+    if (animate) {
+      animateCameraTo(fitPosition(model, dir));
+    } else {
+      camera.position.copy(dir);
+      ctrls.target.set(0, 0, 0);
+      fitCameraToModel(model);
     }
+  }
+  requestRender();
+}
 
-    camera.position.set(
-      isLeft ? 3.844 : -3,
-      isLeft ? 1.847 : 1.5,
-      isLeft ? 3.667 : -3
-    );
-    ctrls.target.set(0, 0, 0);
-    ctrls.update();
-    if (state.loadedModel) fitCameraToModel(state.loadedModel);
-  });
-});
+// ── Events ───────────────────────────────────────────────────────────────
+mirrorBtns.forEach((b) => b.addEventListener("click", () => setConfig({ mirror: b.dataset.mirror })));
+beltBtns.forEach((b) => b.addEventListener("click", () => setConfig({ belt: b.dataset.belt })));
+trayBtns.forEach((b) => b.addEventListener("click", () => setConfig({ tray: b.dataset.tray })));
+bodySwatches.forEach((b) => b.addEventListener("click", () => setConfig({ color: b.dataset.color })));
+lightSwatches.forEach((b) => b.addEventListener("click", () => setConfig({ light: b.dataset.color })));
+colorCustom.addEventListener("input", (e) => setConfig({ color: e.target.value }));
+lightCustom.addEventListener("input", (e) => setConfig({ light: e.target.value }));
 
-//Belt
-const beltBtns = [...document.querySelectorAll(".opt-btn[data-belt]")];
-
-beltBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    setActiveBtn(beltBtns, btn);
-    setBelt(btn.dataset.belt);
-  });
-});
-
-//Tray
-const trayBtns = [...document.querySelectorAll(".opt-btn[data-tray]")];
-
-trayBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    setActiveBtn(trayBtns, btn);
-    setTray(btn.dataset.tray);
-  });
-});
+// ── Init from URL ────────────────────────────────────────────────────────
+state.config = { ...DEFAULT_CONFIG, ...readConfigFromUrl() };
+syncUI();
+writeConfigToUrl(state.config);

@@ -1,16 +1,9 @@
-import {
-  wrap,
-  scene,
-  camera,
-  renderer,
-  ctrls,
-  fitCameraToModel,
-} from "./scene.js";
+import { onBeforeRender, requestRender } from "./scene.js";
 import { loadModel } from "./model.js";
 import { initHotspots, updateHotspotPositions, hidePopup } from "./hotspots.js";
-import { state } from "./state.js";
-import "./configurator.js";
+import { onModelLoaded } from "./configurator.js";
 import "./devis.js";
+import "./actions.js";
 
 //Accordion
 document.querySelectorAll(".accordion-btn").forEach((btn) => {
@@ -22,39 +15,40 @@ document.querySelectorAll(".accordion-btn").forEach((btn) => {
   });
 });
 
-//Keyboard shortcuts
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") hidePopup();
-  if (e.key === "c" || e.key === "C") {
-    const { x, y, z } = camera.position;
-    console.log(
-      `📷 camera.position.set(${x.toFixed(3)}, ${y.toFixed(3)}, ${z.toFixed(
-        3
-      )})`
-    );
-  }
 });
 
-//Load model
+// ── Load model with progress ──────────────────────────────────────────────
 const loaderEl = document.getElementById("loader");
-loadModel(loaderEl, () => initHotspots());
+const loaderBar = document.getElementById("loader-bar");
+const loaderPct = document.getElementById("loader-pct");
+const progressEl = loaderEl.querySelector("[role=progressbar]");
 
-//Render loop
-function animate() {
-  requestAnimationFrame(animate);
-  ctrls.update();
-  updateHotspotPositions();
-  renderer.render(scene, camera);
-}
-animate();
-
-//Resize
-window.addEventListener("resize", () => {
-  camera.aspect = wrap.clientWidth / wrap.clientHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(wrap.clientWidth, wrap.clientHeight);
-  if (state.loadedModel) fitCameraToModel(state.loadedModel);
+loadModel({
+  onProgress(ratio) {
+    if (ratio === null) {
+      loaderEl.classList.add("indeterminate");
+      return;
+    }
+    const pct = Math.round(ratio * 100);
+    loaderBar.style.transform = `scaleX(${ratio})`;
+    loaderPct.textContent = `${pct}%`;
+    progressEl.setAttribute("aria-valuenow", String(pct));
+  },
+  onLoad() {
+    onModelLoaded();
+    initHotspots();
+    loaderEl.classList.add("hidden");
+    setTimeout(() => loaderEl.remove(), 400);
+  },
+  onError() {
+    loaderEl.classList.add("hidden");
+  },
 });
+
+onBeforeRender(updateHotspotPositions);
+requestRender();
 
 // ── Cookie banner ──────────────────────────────────────────────────────────
 const cookieBanner = document.getElementById("cookie-banner");

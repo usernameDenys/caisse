@@ -1,0 +1,179 @@
+{
+  "lang": "en",
+  "label": "EN",
+  "url": "https://sommespro.fr/en/",
+  "meta": {
+    "title": "Standard Supermarket Checkout — SommesPro",
+    "description": "Configure your Standard supermarket checkout in 3D: orientation, belt 900 to 1700 mm, tray module, RAL colour and interior lighting. Steel structure, epoxy paint, 220V motor. Request a quote.",
+    "ogLocale": "en_GB",
+    "ogTitle": "Standard Supermarket Checkout — 3D Configurator",
+    "ogDescription": "Configure your supermarket checkout in 3D: belt, RAL colour, tray module, lighting. Request a quote online.",
+    "ldName": "Standard Supermarket Checkout — 3D Configurator",
+    "ldDescription": "Configurable supermarket checkout: degreased sheet steel structure, cold rolling, RAL epoxy paint, conveyor belt 900–1700 mm, single-phase 220V EU motor, mechanically welded frame."
+  },
+  "links": {
+    "legal": "/en/legal-notice.html",
+    "legalLabel": "Legal notice",
+    "privacy": "/en/privacy-policy.html",
+    "privacyLabel": "Privacy",
+    "legalNav": "Legal pages",
+    "newWindow": "(new window)"
+  },
+  "viewer": {
+    "label": "Interactive 3D viewer",
+    "hintLabel": "Navigation tips",
+    "rotate": "Drag to rotate",
+    "zoom": "Scroll / pinch to zoom",
+    "hotspotsHtml": "<strong class=\"hint-strong--i\">i</strong> points — component details",
+    "loading": "Loading 3D model"
+  },
+  "panel": {
+    "label": "Configuration panel",
+    "subtitle": "Supermarket checkout",
+    "title": "Standard Checkout",
+    "cta": "Request a quote",
+    "share": "Copy link",
+    "shareCopied": "Link copied",
+    "pdf": "Download PDF",
+    "pdfBusy": "Generating…"
+  },
+  "options": {
+    "mirror": "Checkout orientation",
+    "mirrorRight": "Left-handed",
+    "mirrorLeft": "Right-handed",
+    "belt": "Conveyor belt",
+    "tray": "Tray module",
+    "color": "Checkout colour",
+    "colorCustom": "Custom colour",
+    "colorCustomPick": "Choose a custom colour",
+    "light": "Interior lighting",
+    "lightCustomPick": "Choose a custom lighting colour"
+  },
+  "ral": {
+    "7016": "Anthracite grey",
+    "9016": "Traffic white",
+    "5010": "Gentian blue",
+    "3020": "Traffic red",
+    "9005": "Jet black"
+  },
+  "lights": {
+    "E7E7E7": "Neutral white",
+    "FFE4B0": "Warm white",
+    "B8D4FF": "Cool white",
+    "FFB347": "Amber",
+    "B8FFD0": "Soft green"
+  },
+  "norms": {
+    "title": "Standards compliance",
+    "items": [
+      "NF X35-701 — Prevention of musculoskeletal disorders",
+      "NF EN ISO 14738 — Anthropometric requirements for the design of workstations on machinery",
+      "NF EN ISO 9241-400 — Ergonomics of human-system interaction",
+      "NF EN 12464-1 — Light and lighting of workplaces",
+      "Art. R.111-19-2 CCH — Accessibility for persons with reduced mobility"
+    ]
+  },
+  "tech": {
+    "title": "Technical specifications",
+    "items": [
+      "Degreased sheet steel structure",
+      "Cold rolling",
+      "Epoxy paint in RAL colours",
+      "Aluminium protection strip included",
+      "Plastic bumper",
+      "Single-phase 220V EU standard motor with rubber conveyor belt",
+      "Front screw adjustment",
+      "Mechanically welded frame with screw levelling",
+      "Wide-clearance rear cut-out for quick tray unloading and PRM accessibility"
+    ]
+  },
+  "operation": {
+    "title": "Operation",
+    "items": [
+      "Control unit with 2-colour lantern function, forward/reverse belt, optional pedal operation",
+      "Stainless steel rear tray for quick cleaning and rapid item evacuation",
+      "Full protective skirt on the customer-side"
+    ]
+  },
+  "cookie": {
+    "label": "Cookie notice",
+    "text": "This site only uses strictly necessary technical cookies. No data is shared with third parties.",
+    "more": "Learn more",
+    "accept": "Got it"
+  },
+  "popup": {
+    "close": "Close details window"
+  },
+  "hotspots": [
+    {
+      "id": "conveyor",
+      "label": "Conveyor belt",
+      "title": "Transport belt",
+      "content": "Rubber belt with front screw adjustment. Forward or reverse operation, optional pedal control."
+    },
+    {
+      "id": "motor",
+      "label": "Motor",
+      "title": "220 V EU Motor",
+      "content": "Single-phase 220 V EU standard motor. Control unit with 2-colour lantern function."
+    },
+    {
+      "id": "bac",
+      "label": "Rear tray",
+      "title": "Stainless steel tray",
+      "content": "Stainless steel rear tray for quick cleaning and rapid item evacuation."
+    },
+    {
+      "id": "protection",
+      "label": "Cashier protection",
+      "title": "Protection screen",
+      "content": "Transparent plexiglass staff protection. Rigid mounting on the checkout base for optimal stability."
+    }
+  ],
+  "devis": {
+    "close": "Close summary",
+    "eyebrow": "Supermarket checkout",
+    "title": "Your configuration summary",
+    "specsLabel": "Selected options",
+    "labels": {
+      "product": "Product",
+      "productValue": "Standard Checkout",
+      "mirror": "Orientation",
+      "belt": "Belt",
+      "tray": "Tray module",
+      "color": "Colour",
+      "light": "Interior lighting",
+      "custom": "Custom",
+      "link": "Configuration link"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "phone": "Phone",
+      "message": "Message",
+      "messagePlaceholder": "Quantity, timing, delivery address…",
+      "required": "required",
+      "note": "A link to your 3D configuration will be included in the request.",
+      "privacyHtml": "Your data is used only to handle your request. <a href=\"/en/privacy-policy.html\">Privacy policy</a>",
+      "submit": "Send request",
+      "sending": "Sending…",
+      "success": "Thank you! Your request has been sent. We will get back to you shortly.",
+      "error": "Sending failed. Please try again or email us directly:",
+      "invalid": "Please enter your name and a valid email address."
+    },
+    "email": {
+      "subject": "Quote request — Standard Checkout",
+      "greeting": "Hello,",
+      "intro": "I would like to receive a quote for the following configuration:",
+      "closing": "Kind regards,"
+    }
+  },
+  "pdf": {
+    "title": "Configuration specification",
+    "date": "Date",
+    "configuration": "Configuration",
+    "filename": "standard-checkout-configuration.pdf",
+    "footer": "Generated from the 3D configurator — non-binding document."
+  }
+}

@@ -210,3 +210,14 @@
   color: #1a1a1a;
   border-color: #1a1a1a;
 }
+
+.panel-header {
+  flex-wrap: wrap;
+}
+
+.panel-actions {
+  flex-basis: 100%;
+  display: flex;
+  gap: 8px;
+  margin-top: -4px;
+}

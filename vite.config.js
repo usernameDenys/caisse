@@ -1,8 +1,10 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
+import i18nPages from "./build/i18n-pages.js";
 
 export default defineConfig({
   base: "/",
+  plugins: [i18nPages({ root: __dirname })],
   build: {
     rollupOptions: {
       input: {
