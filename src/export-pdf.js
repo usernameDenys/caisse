@@ -76,7 +76,7 @@ async function buildPdf() {
     doc.text(row.label, margin, y);
     let x = valueX;
     if (row.swatch) {
-      doc.setFillColor(...hexToRgb(row.swatch)).setDrawColor(200, 200, 200);
+      doc.setFillColor(...hexToRgb(row.display ?? row.swatch)).setDrawColor(200, 200, 200);
       doc.roundedRect(x, y - 3.4, 4.2, 4.2, 0.8, 0.8, "FD");
       x += 6.5;
     }

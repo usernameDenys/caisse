@@ -47,6 +47,22 @@ function showPopup(hs, pinEl) {
   popupTitle.textContent = hs.title;
   popupContent.textContent = hs.content;
   popup.hidden = false;
+  positionPopup();
+}
+
+// Keep the tooltip next to its pin, inside the stage
+function positionPopup() {
+  if (!activePin || popup.hidden) return;
+  const x = parseFloat(activePin.style.left) || 0;
+  const y = parseFloat(activePin.style.top) || 0;
+  const w = popup.offsetWidth;
+  const h = popup.offsetHeight;
+  const pad = 12;
+  let left = x + 24;
+  if (left + w > wrap.clientWidth - pad) left = x - 24 - w;
+  const top = Math.min(Math.max(y - 24, pad), wrap.clientHeight - h - pad);
+  popup.style.left = `${Math.max(pad, left)}px`;
+  popup.style.top = `${top}px`;
 }
 
 export function hidePopup() {
@@ -104,4 +120,5 @@ export function updateHotspotPositions() {
     hs.el.style.left = `${(pos.x * 0.5 + 0.5) * wrap.clientWidth}px`;
     hs.el.style.top = `${(-pos.y * 0.5 + 0.5) * wrap.clientHeight}px`;
   });
+  positionPopup();
 }

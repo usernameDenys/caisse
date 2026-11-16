@@ -17,7 +17,8 @@
     "privacy": "/en/privacy-policy.html",
     "privacyLabel": "Privacy",
     "legalNav": "Legal pages",
-    "newWindow": "(new window)"
+    "newWindow": "(new window)",
+    "home": "/en/"
   },
   "viewer": {
     "label": "Interactive 3D viewer",
@@ -25,7 +26,17 @@
     "rotate": "Drag to rotate",
     "zoom": "Scroll / pinch to zoom",
     "hotspotsHtml": "<strong class=\"hint-strong--i\">i</strong> points — component details",
-    "loading": "Loading 3D model"
+    "loading": "Loading 3D model",
+    "hintHtml": "Drag to rotate · scroll to zoom · <strong>i</strong> for details",
+    "hintShort": "Drag to rotate",
+    "views": "View angle",
+    "view34": "3/4",
+    "viewFront": "Front",
+    "viewSide": "Side",
+    "viewBack": "Back",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "fullscreen": "Full screen"
   },
   "panel": {
     "label": "Configuration panel",
@@ -47,7 +58,10 @@
     "colorCustom": "Custom colour",
     "colorCustomPick": "Choose a custom colour",
     "light": "Interior lighting",
-    "lightCustomPick": "Choose a custom lighting colour"
+    "lightCustomPick": "Choose a custom lighting colour",
+    "beltLong": "Belt length",
+    "trayShort": "Tray module",
+    "otherRal": "Other RAL"
   },
   "ral": {
     "7016": "Anthracite grey",
@@ -175,5 +189,44 @@
     "configuration": "Configuration",
     "filename": "standard-checkout-configuration.pdf",
     "footer": "Generated from the 3D configurator — non-binding document."
+  },
+  "header": {
+    "breadcrumb": "Supermarket checkouts",
+    "planner": "Plan my store",
+    "plannerShort": "Plan",
+    "pdf": "PDF sheet",
+    "share": "Share",
+    "language": "Language",
+    "breadcrumbLabel": "Breadcrumb"
+  },
+  "steps": {
+    "label": "Steps",
+    "dimensions": "Dimensions",
+    "finish": "Finish",
+    "details": "Details"
+  },
+  "bar": {
+    "title": "Your configuration",
+    "chosen": "Selected options",
+    "price": "Price",
+    "onQuote": "On request",
+    "priceOnQuote": "Price on request",
+    "optionsCount": "{n} options selected",
+    "summary": "View summary",
+    "belt": "Belt",
+    "tray": "Tray"
+  },
+  "devis2": {
+    "title": "Request a quote",
+    "lead": "Leave your details and we will reply with an offer tailored to this configuration.",
+    "summary": "Your configuration",
+    "preview": "Configuration preview",
+    "edit": "Edit configuration",
+    "emailPro": "Business email",
+    "requiredNote": "Required fields",
+    "close": "Close"
+  },
+  "footer": {
+    "brand": "© 2026 SommesPro"
   }
 }
