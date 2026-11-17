@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>Planificateur de magasin — SommesPro</title>
+    <meta name="description" content="Disposez vos caisses de supermarché Standard sur le plan de votre magasin : nombre de caisses, passages clients, export PDF et demande de devis." />
+    <link rel="canonical" href="https://sommespro.fr/planner/" />
+    <link rel="alternate" hreflang="fr" href="https://sommespro.fr/planner/" />
+    <link rel="alternate" hreflang="en" href="https://sommespro.fr/en/planner/" />
+    <link rel="alternate" hreflang="x-default" href="https://sommespro.fr/planner/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:url" content="https://sommespro.fr/planner/" />
+    <meta property="og:site_name" content="SommesPro" />
+    <meta property="og:title" content="Planificateur de magasin — Caisses Standard" />
+    <meta property="og:description" content="Placez vos caisses sur le plan de votre magasin, vérifiez les passages clients et exportez un plan PDF." />
+    <meta property="og:image" content="https://sommespro.fr/og-image.webp" />
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Planificateur de magasin — Caisses Standard",
+  "description": "Disposez vos caisses de supermarché Standard sur le plan de votre magasin : nombre de caisses, passages clients, export PDF et demande de devis.",
+  "image": "https://sommespro.fr/og-image.webp",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Web",
+  "url": "https://sommespro.fr/planner/"
+}
+    </script>
+
+    <script type="module" crossorigin src="/assets/preload-helper-DfyYohZP.js"></script>
+    <script type="module" crossorigin src="/assets/main-DGM8q5I2.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-BQiplfJz.css">
+  </head>
+  <body class="app planner">
+    <!-- ── Header ─────────────────────────────────────────────────────── -->
+    <header class="app-header">
+      <div class="app-header-left">
+        <a class="brand" href="/">sommespro</a>
+        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+          <a href="/" id="back-link-crumb">Caisse Standard</a>
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          <span aria-current="page">Planificateur de magasin</span>
+        </nav>
+      </div>
+      <div class="app-header-right">
+        <a class="btn btn-outline" id="back-link" href="/">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg>
+          <span class="btn-label">Configurateur</span>
+        </a>
+        <nav class="lang-switcher" aria-label="Langue">
+          <span class="lang-current" aria-current="true">FR</span>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <a class="lang-link" href="/en/planner/" hreflang="en">EN</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ── Left: room + add checkouts ─────────────────────────────────── -->
+    <aside class="side side-left" aria-label="Ligne de caisses">
+      <div class="side-head">
+        <p class="eyebrow">Planificateur de magasin</p>
+        <h1 class="side-title">Plan d'implantation</h1>
+      </div>
+
+      <section class="side-section" aria-labelledby="wizard-title">
+        <h2 id="wizard-title">Ligne de caisses</h2>
+        <div class="config-picker" id="wizard-config">
+          <div class="mini-label">Sens de caisse</div>
+          <div class="segmented segmented-full" data-field="mirror" role="group" aria-label="Sens de caisse">
+            <button type="button" data-value="right">Gaucher</button>
+            <button type="button" data-value="left">Droitier</button>
+          </div>
+          <div class="mini-label">Longueur du tapis</div>
+          <div class="segmented segmented-full" data-field="belt" role="group" aria-label="Longueur du tapis">
+            <button type="button" data-value="L">1 700</button>
+            <button type="button" data-value="M">1 400</button>
+            <button type="button" data-value="S">900</button>
+          </div>
+          <div class="mini-label">Module bac</div>
+          <div class="segmented segmented-full" data-field="tray" role="group" aria-label="Module bac">
+            <button type="button" data-value="1250_L">1200×1100</button>
+            <button type="button" data-value="700_L">700×1100</button>
+            <button type="button" data-value="700_M">700×600</button>
+          </div>
+        </div>
+        <div class="mini-label">Disposition</div>
+        <div class="segmented segmented-full" id="row-layout" role="group" aria-label="Disposition">
+          <button type="button" data-value="pairs" aria-pressed="true">Caisses doubles</button>
+          <button type="button" data-value="single" aria-pressed="false">Caisses simples</button>
+        </div>
+        <label class="field field-sm">
+          <span>Nombre de caisses</span>
+          <input id="row-count" type="number" min="1" max="40" step="1" value="4" inputmode="numeric" />
+        </label>
+        <label class="check"><input type="checkbox" id="row-guidage" checked /> Guidage entre les caisses</label>
+        <label class="check"><input type="checkbox" id="row-eas" checked /> Antivol (portique EAS) côté bac</label>
+        <label class="check"><input type="checkbox" id="row-pmr" checked /> Inclure une caisse PMR (passage 900 mm)</label>
+      </section>
+
+      <section class="side-section" aria-labelledby="room-title">
+        <h2 id="room-title">Surface</h2>
+        <div class="field-row">
+          <label class="field field-sm">
+            <span>Largeur</span>
+            <span class="input-unit"><input id="room-w" type="number" min="3" max="200" step="0.5" inputmode="decimal" /><span>m</span></span>
+          </label>
+          <label class="field field-sm">
+            <span>Profondeur</span>
+            <span class="input-unit"><input id="room-h" type="number" min="3" max="200" step="0.5" inputmode="decimal" /><span>m</span></span>
+          </label>
+        </div>
+        <label class="field field-sm">
+          <span>Passage client</span>
+          <span class="input-unit"><input id="aisle" type="number" min="500" max="3000" step="50" inputmode="numeric" /><span>mm</span></span>
+          <small class="field-hint">Largeur libre minimale côté client de chaque caisse.</small>
+        </label>
+      </section>
+
+      <!-- Always visible at the bottom of the panel -->
+      <div class="side-footer">
+          <button class="btn btn-primary btn-block" id="place-row" type="button">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="4" width="4" height="16" rx="1"/><rect x="17" y="4" width="4" height="16" rx="1"/></svg>
+            Créer la ligne de caisses
+          </button>
+      </div>
+    </aside>
+
+    <!-- ── Canvas ─────────────────────────────────────────────────────── -->
+    <main class="plan-stage">
+      <svg id="plan" class="plan" role="application" aria-label="Plan d'implantation" tabindex="0"></svg>
+      <div id="view3d" class="view3d" aria-label="Vue 3D du magasin" hidden>
+        <p class="view3d-hint">Glisser pour pivoter · molette pour zoomer · clic droit pour déplacer. Modifiez le plan en 2D.</p>
+        <button class="btn btn-outline view3d-refit" id="refit3d" type="button">Ajuster à l'écran</button>
+        <div class="view3d-loading" id="view3d-loading"><div class="loader-spinner" aria-hidden="true"></div></div>
+      </div>
+
+      <div class="segmented view-switch" role="group" aria-label="Mode d'affichage">
+        <button type="button" data-view="2d" aria-pressed="true">Plan 2D</button>
+        <button type="button" data-view="3d" aria-pressed="false">Vue 3D</button>
+      </div>
+
+      <div class="plan-toolbar" role="toolbar" aria-label="Outils">
+        <button class="icon-btn" id="undo" type="button" aria-label="Annuler" title="Annuler"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+        <button class="icon-btn" id="redo" type="button" aria-label="Rétablir" title="Rétablir"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
+        <span class="toolbar-sep" aria-hidden="true"></span>
+        <button class="icon-btn" id="zoom-out" type="button" aria-label="Zoom arrière" title="Zoom arrière"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+        <button class="icon-btn" id="zoom-in" type="button" aria-label="Zoom avant" title="Zoom avant"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+        <button class="icon-btn" id="fit" type="button" aria-label="Ajuster à l'écran" title="Ajuster à l'écran"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+        <span class="toolbar-sep" aria-hidden="true"></span>
+        <button class="toggle-btn" id="ortho" type="button" aria-pressed="true" title="Déplacements horizontaux ou verticaux uniquement (Maj pour inverser)">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4v16h16"/></svg>
+          Ortho
+        </button>
+        <button class="toggle-btn" id="magnet" type="button" aria-pressed="true" title="Les éléments s'accrochent aux caisses voisines et aux murs (Alt pour désactiver)">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v8a6 6 0 0 0 12 0V3"/><path d="M6 7h4"/><path d="M14 7h4"/></svg>
+          Aimant
+        </button>
+        <button class="toggle-btn" id="dims" type="button" aria-pressed="true" title="Afficher les cotes : largeurs, passages, antennes, longueur totale">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 8v8"/><path d="M21 8v8"/><path d="m6 10-2 2 2 2"/><path d="m18 10 2 2-2 2"/></svg>
+          Cotes
+        </button>
+        <span class="toolbar-sep" aria-hidden="true"></span>
+        <button class="icon-btn icon-btn-danger" id="clear-all" type="button" aria-label="Tout effacer" title="Tout effacer (Ctrl+Z pour annuler)"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></button>
+      </div>
+
+      <div class="plan-status">
+        <span id="status-cursor" class="mono"></span>
+        <span id="status-count"></span>
+        <span id="status-conflicts"></span>
+        <span class="status-shortcuts">R pivoter · Suppr supprimer · Ctrl+D dupliquer · Ctrl+A tout sélectionner · Ctrl+Z annuler · clic droit ou Espace : déplacer la vue</span>
+      </div>
+    </main>
+
+    <!-- ── Right: selection ───────────────────────────────────────────── -->
+    <aside class="side side-right" aria-label="Caisse sélectionnée">
+      <section class="side-section" aria-labelledby="add-title">
+        <h2 id="add-title">Ajouter un élément</h2>
+        <p class="side-hint">Glissez un élément sur le plan (ou cliquez pour l'ajouter au centre) : il s'aimante aux caisses et les voisines se décalent. Glissez « Passage PMR » sur le passage d'une caisse pour le porter à 900 mm.</p>
+        <div class="add-grid">
+          <button class="add-btn" id="add-one" type="button">
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="8" y="2" width="8" height="20" rx="1"/><path d="M8 8h8"/></svg>
+            Caisse
+          </button>
+          <button class="add-btn" id="add-pair" type="button">
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="4" y="2" width="8" height="20" rx="1"/><rect x="12" y="2" width="8" height="20" rx="1"/><path d="M4 8h16"/></svg>
+            Caisse double
+          </button>
+          <button class="add-btn" id="add-pmr" type="button">
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11.5" cy="4.6" r="1.6" fill="currentColor"/><path d="M11.5 7.8v5.6h4.6l2.6 4.8M11.5 10.6h4"/><path d="M8.6 11.4a5.4 5.4 0 1 0 7.3 6.2"/></svg>
+            Passage PMR
+          </button>
+          <button class="add-btn" id="add-guidage" type="button">
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2v20"/><rect x="10.5" y="1.5" width="3" height="3" fill="currentColor"/><rect x="10.5" y="10.5" width="3" height="3" fill="currentColor"/><rect x="10.5" y="19.5" width="3" height="3" fill="currentColor"/></svg>
+            Guidage
+          </button>
+          <button class="add-btn" id="add-eas" type="button">
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="10" y="3" width="4" height="18" rx="1"/><path d="M6 8v8"/><path d="M18 8v8"/></svg>
+            Antivol
+          </button>
+        </div>
+      </section>
+      <section class="side-section" id="sel-empty">
+        <h2>Caisse sélectionnée</h2>
+        <p class="side-hint">Cliquez sur un élément pour le sélectionner, ou tracez un cadre sur une zone vide pour en sélectionner plusieurs (Maj pour ajouter). Déplacez la vue avec le clic droit ou Espace + glisser.</p>
+      </section>
+
+      <section class="side-section" id="sel-panel" hidden>
+        <h2><span id="sel-name"></span> · Caisse sélectionnée</h2>
+        <ul class="conflict-list" id="sel-conflicts"></ul>
+        <p class="group-note" id="sel-group" hidden>
+          <span>Caisse double : se déplace en bloc.</span>
+          <button class="link-btn" id="ungroup" type="button">Dissocier</button>
+        </p>
+        <label class="field field-sm" id="sel-guidage" hidden>
+          <span>Sections de guidage</span>
+          <span class="input-unit"><input id="sel-sections" type="number" min="1" max="20" step="1" inputmode="numeric" /><span>× 1 m</span></span>
+        </label>
+        <label class="check check-pmr" id="sel-pmr-wrap"><input type="checkbox" id="sel-pmr" /> Passage PMR (900 mm)</label>
+        <details class="collapse" id="sel-config-wrap">
+          <summary>Configuration et position</summary>
+        <div class="config-picker" id="sel-config">
+          <div class="mini-label">Sens de caisse</div>
+          <div class="segmented segmented-full" data-field="mirror" role="group" aria-label="Sens de caisse">
+            <button type="button" data-value="right">Gaucher</button>
+            <button type="button" data-value="left">Droitier</button>
+          </div>
+          <div class="mini-label">Longueur du tapis</div>
+          <div class="segmented segmented-full" data-field="belt" role="group" aria-label="Longueur du tapis">
+            <button type="button" data-value="L">1 700</button>
+            <button type="button" data-value="M">1 400</button>
+            <button type="button" data-value="S">900</button>
+          </div>
+          <div class="mini-label">Module bac</div>
+          <div class="segmented segmented-full" data-field="tray" role="group" aria-label="Module bac">
+            <button type="button" data-value="1250_L">1200×1100</button>
+            <button type="button" data-value="700_L">700×1100</button>
+            <button type="button" data-value="700_M">700×600</button>
+          </div>
+        </div>
+        <div class="mini-label" id="sel-pos-label">Position (centre)</div>
+        <div class="field-row" id="sel-pos">
+          <label class="field field-sm"><span>X</span><span class="input-unit"><input id="sel-x" type="number" step="50" inputmode="numeric" /><span>mm</span></span></label>
+          <label class="field field-sm"><span>Y</span><span class="input-unit"><input id="sel-y" type="number" step="50" inputmode="numeric" /><span>mm</span></span></label>
+        </div>
+        </details>
+        <div class="btn-row">
+          <button class="btn btn-outline" id="rot-left" type="button" aria-label="Pivoter à gauche" title="Pivoter à gauche"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>90°</button>
+          <button class="btn btn-outline" id="rot-right" type="button" aria-label="Pivoter à droite" title="Pivoter à droite"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>90°</button>
+          <button class="btn btn-outline" id="duplicate" type="button">Dupliquer</button>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-outline" id="view-3d" href="/" target="_blank" rel="noopener">Voir en 3D</a>
+          <button class="btn btn-outline btn-danger" id="delete" type="button">Supprimer</button>
+        </div>
+      </section>
+
+      <section class="side-section">
+        <h2>Configurations</h2>
+        <ul class="group-list" id="group-list"></ul>
+      </section>
+    </aside>
+
+    <!-- ── Summary bar ────────────────────────────────────────────────── -->
+    <div class="summary-bar">
+      <div class="summary-info">
+        <div class="summary-title">
+          <span class="eyebrow">Votre plan</span>
+          <span class="summary-product" id="bar-total"></span>
+        </div>
+        <ul class="chips" id="bar-chips" aria-label="Configurations"></ul>
+      </div>
+      <div class="summary-cta">
+        <button class="btn btn-outline btn-lg-outline" id="plan-pdf" type="button">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+          <span class="btn-label">Plan PDF</span>
+        </button>
+        <button id="devis-btn" class="btn btn-primary btn-lg" type="button">
+          Demander un devis
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Quote dialog ───────────────────────────────────────────────── -->
+    <div id="devis-modal" role="dialog" aria-modal="true" aria-labelledby="devis-title" hidden>
+      <div class="devis-backdrop"></div>
+      <div class="devis-panel" role="document">
+        <section class="devis-summary" aria-label="Votre plan">
+          <p class="eyebrow">Votre plan</p>
+          <div>
+            <p class="devis-sub">Caisse Standard</p>
+            <p class="devis-product" id="quote-total"></p>
+          </div>
+          <dl class="devis-specs" id="devis-specs"></dl>
+          <ul class="group-list" id="quote-groups"></ul>
+          <button class="link-btn" id="devis-edit" type="button">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            Modifier la configuration
+          </button>
+        </section>
+
+        <section class="devis-main">
+          <button class="devis-close icon-btn" id="devis-close" type="button" aria-label="Fermer">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
+          </button>
+          <div class="devis-heading">
+            <h2 id="devis-title">Devis pour votre magasin</h2>
+            <p>Nous vous répondons avec une offre pour l'ensemble des caisses de ce plan.</p>
+          </div>
+
+          <form id="devis-form" class="devis-form" novalidate>
+            <div class="devis-grid">
+              <label class="field">
+                <span>Nom <abbr title="obligatoire">*</abbr></span>
+                <input name="name" type="text" autocomplete="name" required maxlength="120" />
+              </label>
+              <label class="field">
+                <span>Email professionnel <abbr title="obligatoire">*</abbr></span>
+                <input name="email" type="email" autocomplete="email" required maxlength="200" />
+              </label>
+              <label class="field">
+                <span>Société</span>
+                <input name="company" type="text" autocomplete="organization" maxlength="200" />
+              </label>
+              <label class="field">
+                <span>Téléphone</span>
+                <input name="phone" type="tel" autocomplete="tel" maxlength="40" />
+              </label>
+              <label class="field field--wide">
+                <span>Message</span>
+                <textarea name="message" rows="4" maxlength="4000" placeholder="Quantité, délais, adresse de livraison…"></textarea>
+              </label>
+              <label class="hp" aria-hidden="true">
+                Website <input name="website" type="text" tabindex="-1" autocomplete="off" />
+              </label>
+            </div>
+
+            <div class="devis-note">
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+              <span>Le récapitulatif du plan sera joint à la demande. Téléchargez le plan PDF pour le partager avec votre équipe. Vos données servent uniquement à traiter votre demande. <a href="/confidentialite.html">Politique de confidentialité</a></span>
+            </div>
+
+            <div class="devis-actions">
+              <span class="required-note"><abbr title="obligatoire">*</abbr> Champs obligatoires</span>
+              <button id="devis-confirm" class="btn btn-primary btn-lg" type="submit">
+                <span class="btn-label">Envoyer la demande</span>
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </button>
+            </div>
+          </form>
+
+          <p class="devis-status" id="devis-status" role="status" aria-live="polite"></p>
+        </section>
+      </div>
+    </div>
+
+  </body>
+</html>
