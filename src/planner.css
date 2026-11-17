@@ -1,0 +1,908 @@
+/* Store planner page. Shares tokens, header, buttons, summary bar and the
+   quote dialog with the configurator (app.css); only the layout differs. */
+@import "./app.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
+.app.planner {
+  grid-template-columns: 300px minmax(0, 1fr) 300px;
+  grid-template-areas:
+    "header header header"
+    "left stage right"
+    "bar bar bar";
+}
+
+/* ── Side panels ────────────────────────────────────────────────────── */
+.side {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+}
+
+.side-left {
+  grid-area: left;
+  border-right: 1px solid var(--line);
+}
+
+.side-right {
+  grid-area: right;
+  border-left: 1px solid var(--line);
+}
+
+.side-head {
+  padding: 24px 24px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.side-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.side-section {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.side-section h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.side-hint {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.mini-label {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.config-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.segmented-full {
+  box-shadow: none;
+  background: var(--soft);
+}
+
+.segmented-full button {
+  flex: 1;
+  height: 32px;
+  padding: 0 6px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.segmented-full button[aria-pressed="false"]:hover {
+  background: #fff;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.field-sm {
+  font-size: 12px;
+  color: var(--muted);
+  gap: 5px;
+}
+
+.field-sm input {
+  height: 38px;
+  width: 100%;
+  min-width: 0;
+  padding: 0 10px;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  border-radius: 8px;
+}
+
+.input-unit {
+  position: relative;
+  display: block;
+}
+
+.input-unit input {
+  padding-right: 38px;
+}
+
+.input-unit > span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.field-hint {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-row .btn {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.app .btn-danger,
+.link-danger {
+  color: var(--danger);
+}
+
+.btn-danger:hover {
+  background: #fdf0ef;
+}
+
+.link-danger {
+  align-self: center;
+  font-size: 13px;
+}
+
+.link-danger:hover {
+  color: #7a1810;
+}
+
+.conflict-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.conflict-list li {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fdf0ef;
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.group-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.group-list li {
+  display: flex;
+  gap: 10px;
+}
+
+.group-list strong {
+  flex-shrink: 0;
+  min-width: 28px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* ── Plan canvas ────────────────────────────────────────────────────── */
+.plan-stage {
+  grid-area: stage;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--stage);
+}
+
+.plan {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.plan:focus {
+  outline: none;
+}
+
+.plan.is-panning {
+  cursor: grabbing;
+}
+
+.plan .room-fill {
+  fill: #fff;
+}
+
+.plan .grid-line {
+  fill: none;
+  stroke: #e8ebee;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .room {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .dim {
+  font: 500 280px Inter, sans-serif;
+  fill: var(--muted);
+  text-anchor: middle;
+}
+
+.plan .item {
+  cursor: move;
+}
+
+.plan .aisle {
+  fill: url(#hatch);
+  stroke: rgba(29, 111, 222, 0.45);
+  stroke-width: 1px;
+  stroke-dasharray: 4 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .hatch-line {
+  stroke: rgba(29, 111, 222, 0.28);
+  stroke-width: 40;
+}
+
+.plan .part {
+  stroke: var(--ink);
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .part-station {
+  fill: #9aa1a9;
+}
+
+.plan .part-cabinet {
+  fill: #7d848c;
+}
+
+.plan .part-belt {
+  fill: #5a6068;
+}
+
+.plan .part-tray {
+  fill: #c4c9cf;
+}
+
+.plan .screen {
+  stroke: #78b4ff;
+  stroke-width: 3px;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .flow {
+  stroke: #fff;
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .flow-head {
+  fill: #fff;
+}
+
+.plan .ck-label {
+  font: 700 260px Inter, sans-serif;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 60px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+.plan .sel-outline {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2px;
+  stroke-dasharray: 6 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .item:hover .part {
+  stroke: var(--accent);
+}
+
+.plan .is-selected .part {
+  stroke: var(--accent);
+  stroke-width: 2px;
+}
+
+.plan .is-conflict .part {
+  stroke: var(--danger);
+  stroke-width: 2.5px;
+}
+
+.plan .is-conflict .part-station,
+.plan .is-conflict .part-tray {
+  fill: #e9a29b;
+}
+
+.plan .is-conflict .aisle {
+  stroke: var(--danger);
+}
+
+.plan-toolbar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.plan-toolbar .icon-btn {
+  width: 38px;
+  height: 38px;
+  box-shadow: none;
+  border-radius: 8px;
+}
+
+.plan-toolbar .icon-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.toggle-btn {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.toggle-btn:hover {
+  background: var(--soft);
+}
+
+.toggle-btn[aria-pressed="true"] {
+  background: var(--ink);
+  color: #fff;
+}
+
+.toolbar-sep {
+  width: 1px;
+  height: 22px;
+  margin: 0 4px;
+  background: var(--line);
+}
+
+.plan-status {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  font-size: 12px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.plan-status > span {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.plan-status > span:empty {
+  display: none;
+}
+
+.plan-status .is-bad {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.plan-status .is-ok {
+  color: var(--success);
+}
+
+.status-shortcuts {
+  margin-left: auto;
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+}
+
+.btn-lg-outline {
+  height: 52px;
+  padding: 0 20px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* Quote dialog: no preview image here */
+.planner .devis-specs dd {
+  justify-content: flex-end;
+}
+
+/* ── Narrower screens ───────────────────────────────────────────────── */
+@media (max-width: 1180px) {
+  .app.planner {
+    grid-template-columns: 280px minmax(0, 1fr);
+    grid-template-rows: var(--header-h) minmax(0, 1fr) minmax(0, auto) var(--bar-h);
+    grid-template-areas:
+      "header header"
+      "left stage"
+      "left right"
+      "bar bar";
+  }
+
+  .side-right {
+    max-height: 40vh;
+    border-left: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .status-shortcuts {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .app.planner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: var(--header-h) 55vh auto auto auto;
+    grid-template-areas: "header" "stage" "right" "left" "bar";
+    overflow-y: auto;
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  html:has(body.planner) {
+    overflow: auto;
+  }
+
+  .side {
+    overflow: visible;
+    max-height: none;
+    border: none;
+    border-top: 1px solid var(--line);
+  }
+
+  #back-link .btn-label {
+    display: none;
+  }
+
+  .summary-bar {
+    position: sticky;
+    bottom: 0;
+  }
+
+  .summary-title,
+  .chips {
+    display: none;
+  }
+
+  .btn-lg-outline .btn-label {
+    display: none;
+  }
+}
+
+/* ── Accessories & snapping ─────────────────────────────────────────── */
+.plan .hit {
+  fill: transparent;
+}
+
+.plan .guide-tube {
+  fill: #14161a;
+}
+
+.plan .guide-post {
+  fill: #14161a;
+  stroke: #fff;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .item-guidage:hover .guide-tube,
+.plan .item-guidage.is-selected .guide-tube {
+  fill: var(--accent);
+}
+
+.plan .eas {
+  fill: #ffd34d;
+  stroke: var(--ink);
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .eas-wave {
+  stroke: #e0a800;
+  stroke-width: 1.5px;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .is-conflict .guide-tube,
+.plan .is-conflict .guide-post {
+  fill: var(--danger);
+}
+
+.plan .is-conflict .eas {
+  stroke: var(--danger);
+  stroke-width: 3px;
+}
+
+.plan .snap-guide {
+  stroke: var(--accent);
+  stroke-width: 1.5px;
+  stroke-dasharray: 6 4;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+/* Wizard / add */
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+}
+
+.add-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.add-btn {
+  min-height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.add-btn {
+  cursor: grab;
+  touch-action: none;
+}
+
+.is-placing,
+.is-placing * {
+  cursor: grabbing !important;
+}
+
+.drag-ghost {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 300;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  font: 600 12px Inter, sans-serif;
+  box-shadow: 0 6px 16px rgba(20, 22, 26, 0.25);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.group-note {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+/* ── 2D / 3D switch and 3D view ─────────────────────────────────────── */
+.view-switch {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+}
+
+.view3d {
+  position: absolute;
+  inset: 0;
+  background: var(--stage);
+}
+
+.view3d canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: none;
+}
+
+.view3d-hint {
+  position: absolute;
+  left: 16px;
+  bottom: 12px;
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.view3d-refit {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.view3d-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--stage);
+}
+
+.plan-stage.is-3d .plan,
+.plan-stage.is-3d .plan-toolbar,
+.plan-stage.is-3d .plan-status {
+  display: none;
+}
+
+/* ── Selection box, panning, collapsible config ─────────────────────── */
+.plan .marquee {
+  fill: rgba(29, 111, 222, 0.08);
+  stroke: var(--accent);
+  stroke-width: 1px;
+  stroke-dasharray: 4 3;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.plan {
+  cursor: default;
+}
+
+.plan.can-pan {
+  cursor: grab;
+}
+
+.icon-btn-danger:hover {
+  background: #fdf0ef;
+  color: var(--danger);
+}
+
+.collapse {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.collapse > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.collapse > summary::-webkit-details-marker {
+  display: none;
+}
+
+.collapse > summary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+.collapse[open] > summary::after {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+.collapse[open] {
+  padding-bottom: 12px;
+}
+
+.collapse > :not(summary) {
+  margin: 0 12px;
+}
+
+.collapse .config-picker {
+  margin-bottom: 8px;
+}
+
+/* ── Dimensions (cotes) ─────────────────────────────────────────────── */
+.plan .dims {
+  pointer-events: none;
+}
+
+.plan .dim-line,
+.plan .dim-tick {
+  stroke: #3d434a;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .dim-tick {
+  stroke-width: 1.5px;
+}
+
+.plan .dim-ext {
+  stroke: #9aa1a9;
+  stroke-width: 0.75px;
+  vector-effect: non-scaling-stroke;
+}
+
+.plan .dim-text {
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  fill: #3d434a;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 0.25em;
+}
+
+.plan .dim-text.is-total {
+  font-weight: 700;
+  fill: var(--ink);
+}
+
+/* Sticky action at the bottom of the left panel */
+.side-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-footer {
+  position: sticky;
+  bottom: 0;
+  margin-top: auto;
+  padding: 14px 24px;
+  border-top: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 -6px 12px rgba(20, 22, 26, 0.04);
+}
+
+.side-footer .btn {
+  height: 46px;
+  font-size: 14px;
+}
+
+/* ── PMR (accessible) aisle ─────────────────────────────────────────── */
+.plan .aisle.is-pmr {
+  stroke: #1d5fbf;
+  stroke-width: 1.5px;
+}
+
+.plan .pmr {
+  pointer-events: none;
+}
+
+.plan .pmr-bg {
+  fill: #1d5fbf;
+}
+
+.plan .pmr-fg {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.plan .pmr-fg-fill {
+  fill: #fff;
+}
+
+.check-pmr {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--soft);
+  font-weight: 500;
+}
+
+.side-hint.flash {
+  animation: hint-flash 1.2s ease;
+}
+
+@keyframes hint-flash {
+  0%, 60% {
+    color: var(--accent);
+  }
+}
+
+#add-pmr {
+  color: #1d5fbf;
+}

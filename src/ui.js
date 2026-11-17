@@ -3,6 +3,8 @@ import * as THREE from "three";
 import { camera, ctrls, animateCameraTo, renderer } from "./scene.js";
 import { t } from "./i18n.js";
 import { onConfigChange, getSelectionSummary } from "./configurator.js";
+import { configToSearch } from "./url-config.js";
+import { state } from "./state.js";
 
 const stage = document.getElementById("canvas-wrap");
 const panel = document.getElementById("panel");
@@ -71,6 +73,8 @@ renderer.domElement.addEventListener("pointerdown", () => hint.classList.add("fa
 
 // ── Summary bar ──────────────────────────────────────────────────────────
 const chips = document.getElementById("bar-chips");
+const plannerLink = document.getElementById("planner-link");
+const plannerBase = plannerLink?.getAttribute("href");
 const count = document.getElementById("bar-count");
 
 onConfigChange(() => {
@@ -98,6 +102,8 @@ onConfigChange(() => {
     })
   );
   count.textContent = b.optionsCount.replace("{n}", rows.length);
+  // The planner pre-selects the checkout configured here
+  if (plannerLink) plannerLink.href = plannerBase + configToSearch(state.config);
 });
 
 document.getElementById("summary-mobile").addEventListener("click", () =>
