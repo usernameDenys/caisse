@@ -18,7 +18,8 @@
     "privacyLabel": "Privacy",
     "legalNav": "Legal pages",
     "newWindow": "(new window)",
-    "home": "/en/"
+    "home": "/en/",
+    "planner": "/en/planner/"
   },
   "viewer": {
     "label": "Interactive 3D viewer",
@@ -228,5 +229,164 @@
   },
   "footer": {
     "brand": "© 2026 SommesPro"
+  },
+  "planner": {
+    "meta": {
+      "title": "Store planner — SommesPro",
+      "description": "Lay out your Standard supermarket checkouts on your store plan: number of checkouts, customer aisles, PDF export and quote request.",
+      "ogTitle": "Store planner — Standard Checkouts",
+      "ogDescription": "Place your checkouts on your store plan, check customer aisles and export a PDF plan."
+    },
+    "eyebrow": "Store planner",
+    "title": "Layout plan",
+    "back": "Configurator",
+    "room": {
+      "title": "Floor area",
+      "width": "Width",
+      "depth": "Depth",
+      "aisle": "Customer aisle",
+      "aisleHint": "Minimum clear width on the customer side of each checkout."
+    },
+    "wizard": {
+      "title": "Checkout bank",
+      "count": "Number of checkouts",
+      "config": "Configuration",
+      "place": "Create the checkout bank",
+      "addOne": "Add one checkout",
+      "layout": "Layout",
+      "single": "Single checkouts",
+      "pairs": "Double checkouts",
+      "withGuidage": "Guidance rails between checkouts",
+      "withEas": "Anti-theft gate (EAS) on the tray side",
+      "withPmr": "Include an accessible (PMR) checkout, 900 mm aisle"
+    },
+    "selection": {
+      "title": "Selected checkout",
+      "empty": "Click an element to select it, or drag a box over an empty area to select several (Shift to add). Pan with right-click or Space + drag.",
+      "position": "Position (centre)",
+      "rotateLeft": "Rotate left",
+      "rotateRight": "Rotate right",
+      "duplicate": "Duplicate",
+      "delete": "Delete",
+      "view3d": "View in 3D",
+      "grouped": "Double checkout: moves as one block.",
+      "ungroup": "Ungroup",
+      "sections": "Rail sections",
+      "guidageTitle": "Guidance rail",
+      "easTitle": "Anti-theft gate (EAS)",
+      "configure": "Configuration and position",
+      "multi": "{n} elements selected",
+      "multiHint": "Changes apply to the whole selection.",
+      "pmr": "Accessible aisle (900 mm)"
+    },
+    "tools": {
+      "label": "Tools",
+      "undo": "Undo",
+      "redo": "Redo",
+      "fit": "Fit to screen",
+      "snap": "Snap to grid (50 mm)",
+      "ortho": "Ortho",
+      "orthoHint": "Horizontal or vertical moves only (Shift to invert)",
+      "magnet": "Magnet",
+      "magnetHint": "Elements snap to nearby checkouts and walls (Alt to disable)",
+      "clear": "Clear all",
+      "clearHint": "Clear all (Ctrl+Z to undo)",
+      "dims": "Dimensions",
+      "dimsHint": "Show dimensions: widths, aisles, antennas, overall length"
+    },
+    "status": {
+      "count": "{n} checkout(s)",
+      "conflicts": "{n} conflict(s)",
+      "ok": "No conflicts",
+      "shortcuts": "R rotate · Del delete · Ctrl+D duplicate · Ctrl+A select all · Ctrl+Z undo · right-click or Space: pan"
+    },
+    "conflict": {
+      "overlap": "Overlaps another checkout",
+      "aisle": "Customer aisle blocked",
+      "outside": "Outside the floor area"
+    },
+    "bar": {
+      "title": "Your plan",
+      "pdf": "PDF plan",
+      "cta": "Request a quote"
+    },
+    "quote": {
+      "title": "Quote for your store",
+      "lead": "We will reply with an offer for all the checkouts in this plan.",
+      "subject": "Quote request — Store plan",
+      "note": "The plan summary will be included in the request. Download the PDF plan to share it with your team.",
+      "empty": "Add at least one checkout to the plan."
+    },
+    "summary": {
+      "room": "Floor area",
+      "count": "Number of checkouts",
+      "aisle": "Customer aisle",
+      "models": "Configurations",
+      "guidage": "Guidance rails",
+      "guidageValue": "{m} m ({n} × 1 m sections)",
+      "eas": "Anti-theft (EAS)",
+      "easValue": "{n} antenna(s)",
+      "pmr": "Accessible checkouts",
+      "pmrValue": "{n} (900 mm aisle)"
+    },
+    "pdf": {
+      "title": "Layout plan",
+      "scale": "Scale",
+      "room": "Floor area",
+      "aisle": "Customer aisle",
+      "count": "Checkouts",
+      "conflicts": "Conflicts",
+      "models": "Configurations",
+      "legend": "Legend",
+      "legendBelt": "Belt",
+      "legendTray": "Workstation and tray",
+      "legendAisle": "Customer aisle",
+      "disclaimer": "Indicative plan generated online, to be validated on site. Dimensions taken from the 3D model. Non-binding.",
+      "filename": "store-plan-sommespro.pdf",
+      "legendGuidage": "Guidance rail (40 × 40 tube, 1 m sections)",
+      "legendEas": "Anti-theft (EAS antenna)",
+      "overview": "Overview",
+      "appearance": "Finish",
+      "color": "Colour",
+      "light": "Lighting",
+      "generating": "Generating…",
+      "page": "Page",
+      "legendDims": "Dimensions in mm",
+      "legendPmr": "Accessible aisle 900 mm",
+      "checkoutsWord": "checkouts",
+      "viewFront": "Front view · customer entry",
+      "viewBack": "Rear view · tray side",
+      "lineLength": "Checkout bank length",
+      "longestLine": "Longest checkout bank",
+      "floor": "Floor and aisles",
+      "typeTitle": "Typical checkout",
+      "view34": "3/4 view",
+      "topView": "Top view",
+      "trayEnd": "tray end",
+      "entryEnd": "customer entry",
+      "dimensions": "Dimensions",
+      "length": "Overall length",
+      "width": "Overall width",
+      "beltHeight": "Working height (belt)",
+      "overallHeight": "Overall height"
+    },
+    "headerLink": "Plan my checkout bank",
+    "headerLinkShort": "Plan",
+    "add": {
+      "title": "Add an element",
+      "hint": "Drag an element onto the plan (or click to add it in the centre): it snaps to checkouts and neighbours shift to make room. Drag “PMR aisle” onto a checkout's aisle to widen it to 900 mm.",
+      "checkout": "Checkout",
+      "pair": "Double checkout",
+      "guidage": "Guidance rail",
+      "eas": "Anti-theft",
+      "pmr": "PMR aisle"
+    },
+    "view": {
+      "label": "View mode",
+      "plan": "2D plan",
+      "view3d": "3D view",
+      "label3d": "3D view of the store",
+      "hint3d": "Drag to rotate · scroll to zoom · right-click to pan. Edit the layout in 2D."
+    }
   }
 }

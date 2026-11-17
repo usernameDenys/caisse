@@ -53,11 +53,6 @@
         </nav>
       </div>
       <div class="app-header-right">
-        <!-- Shown once the store planner exists -->
-        <a class="btn btn-dark planner-link" href="/planner/" hidden>
-          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-          <span class="label-long">{{header.planner}}</span><span class="label-short">{{header.plannerShort}}</span>
-        </a>
         <button id="share-btn" class="btn btn-outline" type="button" aria-label="{{panel.share}}">
           <svg class="icon-link" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
           <svg class="icon-share" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg>
@@ -70,6 +65,10 @@
         <nav class="lang-switcher" aria-label="{{header.language}}">
 {{{langSwitcher}}}
         </nav>
+        <a class="btn btn-dark planner-link" id="planner-link" href="{{links.planner}}">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          <span class="label-long">{{planner.headerLink}}</span><span class="label-short">{{planner.headerLinkShort}}</span>
+        </a>
         <span class="sr-only" id="share-status" aria-live="polite"></span>
       </div>
     </header>

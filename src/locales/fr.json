@@ -18,7 +18,8 @@
     "privacyLabel": "Confidentialité",
     "legalNav": "Pages légales",
     "newWindow": "(nouvelle fenêtre)",
-    "home": "/"
+    "home": "/",
+    "planner": "/planner/"
   },
   "viewer": {
     "label": "Visualiseur 3D interactif",
@@ -228,5 +229,164 @@
   },
   "footer": {
     "brand": "© 2026 SommesPro"
+  },
+  "planner": {
+    "meta": {
+      "title": "Planificateur de magasin — SommesPro",
+      "description": "Disposez vos caisses de supermarché Standard sur le plan de votre magasin : nombre de caisses, passages clients, export PDF et demande de devis.",
+      "ogTitle": "Planificateur de magasin — Caisses Standard",
+      "ogDescription": "Placez vos caisses sur le plan de votre magasin, vérifiez les passages clients et exportez un plan PDF."
+    },
+    "eyebrow": "Planificateur de magasin",
+    "title": "Plan d'implantation",
+    "back": "Configurateur",
+    "room": {
+      "title": "Surface",
+      "width": "Largeur",
+      "depth": "Profondeur",
+      "aisle": "Passage client",
+      "aisleHint": "Largeur libre minimale côté client de chaque caisse."
+    },
+    "wizard": {
+      "title": "Ligne de caisses",
+      "count": "Nombre de caisses",
+      "config": "Configuration",
+      "place": "Créer la ligne de caisses",
+      "addOne": "Ajouter une caisse",
+      "layout": "Disposition",
+      "single": "Caisses simples",
+      "pairs": "Caisses doubles",
+      "withGuidage": "Guidage entre les caisses",
+      "withEas": "Antivol (portique EAS) côté bac",
+      "withPmr": "Inclure une caisse PMR (passage 900 mm)"
+    },
+    "selection": {
+      "title": "Caisse sélectionnée",
+      "empty": "Cliquez sur un élément pour le sélectionner, ou tracez un cadre sur une zone vide pour en sélectionner plusieurs (Maj pour ajouter). Déplacez la vue avec le clic droit ou Espace + glisser.",
+      "position": "Position (centre)",
+      "rotateLeft": "Pivoter à gauche",
+      "rotateRight": "Pivoter à droite",
+      "duplicate": "Dupliquer",
+      "delete": "Supprimer",
+      "view3d": "Voir en 3D",
+      "grouped": "Caisse double : se déplace en bloc.",
+      "ungroup": "Dissocier",
+      "sections": "Sections de guidage",
+      "guidageTitle": "Guidage",
+      "easTitle": "Antivol (EAS)",
+      "configure": "Configuration et position",
+      "multi": "{n} éléments sélectionnés",
+      "multiHint": "Les modifications s'appliquent à toute la sélection.",
+      "pmr": "Passage PMR (900 mm)"
+    },
+    "tools": {
+      "label": "Outils",
+      "undo": "Annuler",
+      "redo": "Rétablir",
+      "fit": "Ajuster à l'écran",
+      "snap": "Aimanter à la grille (50 mm)",
+      "ortho": "Ortho",
+      "orthoHint": "Déplacements horizontaux ou verticaux uniquement (Maj pour inverser)",
+      "magnet": "Aimant",
+      "magnetHint": "Les éléments s'accrochent aux caisses voisines et aux murs (Alt pour désactiver)",
+      "clear": "Tout effacer",
+      "clearHint": "Tout effacer (Ctrl+Z pour annuler)",
+      "dims": "Cotes",
+      "dimsHint": "Afficher les cotes : largeurs, passages, antennes, longueur totale"
+    },
+    "status": {
+      "count": "{n} caisse(s)",
+      "conflicts": "{n} conflit(s)",
+      "ok": "Aucun conflit",
+      "shortcuts": "R pivoter · Suppr supprimer · Ctrl+D dupliquer · Ctrl+A tout sélectionner · Ctrl+Z annuler · clic droit ou Espace : déplacer la vue"
+    },
+    "conflict": {
+      "overlap": "Chevauche une autre caisse",
+      "aisle": "Passage client obstrué",
+      "outside": "Dépasse de la surface"
+    },
+    "bar": {
+      "title": "Votre plan",
+      "pdf": "Plan PDF",
+      "cta": "Demander un devis"
+    },
+    "quote": {
+      "title": "Devis pour votre magasin",
+      "lead": "Nous vous répondons avec une offre pour l'ensemble des caisses de ce plan.",
+      "subject": "Demande de devis — Plan magasin",
+      "note": "Le récapitulatif du plan sera joint à la demande. Téléchargez le plan PDF pour le partager avec votre équipe.",
+      "empty": "Ajoutez au moins une caisse au plan."
+    },
+    "summary": {
+      "room": "Surface",
+      "count": "Nombre de caisses",
+      "aisle": "Passage client",
+      "models": "Configurations",
+      "guidage": "Guidage",
+      "guidageValue": "{m} m ({n} sections de 1 m)",
+      "eas": "Antivol (EAS)",
+      "easValue": "{n} antenne(s)",
+      "pmr": "Caisses PMR",
+      "pmrValue": "{n} (passage 900 mm)"
+    },
+    "pdf": {
+      "title": "Plan d'implantation",
+      "scale": "Échelle",
+      "room": "Surface",
+      "aisle": "Passage client",
+      "count": "Caisses",
+      "conflicts": "Conflits",
+      "models": "Configurations",
+      "legend": "Légende",
+      "legendBelt": "Tapis",
+      "legendTray": "Poste et bac",
+      "legendAisle": "Passage client",
+      "disclaimer": "Plan indicatif généré en ligne, à valider sur site. Dimensions issues du modèle 3D. Non contractuel.",
+      "filename": "plan-magasin-sommespro.pdf",
+      "legendGuidage": "Guidage (tube 40 × 40, sections 1 m)",
+      "legendEas": "Antivol (antenne EAS)",
+      "overview": "Vue d'ensemble",
+      "appearance": "Finition",
+      "color": "Couleur",
+      "light": "Éclairage",
+      "generating": "Génération…",
+      "page": "Page",
+      "legendDims": "Cotes en mm",
+      "legendPmr": "Passage PMR 900 mm",
+      "checkoutsWord": "caisses",
+      "viewFront": "Vue de face · entrée clients",
+      "viewBack": "Vue arrière · côté bacs",
+      "lineLength": "Longueur de la ligne",
+      "longestLine": "Ligne la plus longue",
+      "floor": "Surface et passages",
+      "typeTitle": "Caisse type",
+      "view34": "Vue 3/4",
+      "topView": "Vue de dessus",
+      "trayEnd": "côté bac",
+      "entryEnd": "entrée clients",
+      "dimensions": "Dimensions",
+      "length": "Longueur hors tout",
+      "width": "Largeur hors tout",
+      "beltHeight": "Hauteur de travail (tapis)",
+      "overallHeight": "Hauteur hors tout"
+    },
+    "headerLink": "Créer ma ligne de caisses",
+    "headerLinkShort": "Ma ligne",
+    "add": {
+      "title": "Ajouter un élément",
+      "hint": "Glissez un élément sur le plan (ou cliquez pour l'ajouter au centre) : il s'aimante aux caisses et les voisines se décalent. Glissez « Passage PMR » sur le passage d'une caisse pour le porter à 900 mm.",
+      "checkout": "Caisse",
+      "pair": "Caisse double",
+      "guidage": "Guidage",
+      "eas": "Antivol",
+      "pmr": "Passage PMR"
+    },
+    "view": {
+      "label": "Mode d'affichage",
+      "plan": "Plan 2D",
+      "view3d": "Vue 3D",
+      "label3d": "Vue 3D du magasin",
+      "hint3d": "Glisser pour pivoter · molette pour zoomer · clic droit pour déplacer. Modifiez le plan en 2D."
+    }
   }
 }

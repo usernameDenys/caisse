@@ -27,3 +27,5 @@ dist-ssr
 # Generated from src/templates/index.html + src/locales/*.json (build/i18n-pages.js)
 /index.html
 /en/index.html
+/planner/
+/en/planner/
